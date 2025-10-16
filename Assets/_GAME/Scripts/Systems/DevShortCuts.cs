@@ -5,9 +5,20 @@ public class DevShortCuts : MonoBehaviour
 {
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            LevelManager.Instance.LoadCurrentLevel();
+        }
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            LevelManager.CurrentLevel++;
+            LevelManager.Instance.LoadCurrentLevel();
+        }
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            LevelManager.CurrentLevel--;
+            LevelManager.CurrentLevel = Mathf.Max(0, LevelManager.CurrentLevel);
+            LevelManager.Instance.LoadCurrentLevel();
         }
     }
 }

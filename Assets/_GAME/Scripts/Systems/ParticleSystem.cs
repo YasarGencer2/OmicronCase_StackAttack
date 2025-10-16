@@ -56,6 +56,8 @@ public class ParticleSystem : MonoBehaviour
     System.Collections.IEnumerator ReturnToPoolAfter(UnityEngine.ParticleSystem particle)
     {
         yield return new WaitForSeconds(particle.main.duration + particle.main.startLifetime.constantMax);
+        if(particle == null)
+            yield break;
         particle.gameObject.SetActive(false);
         var type = System.Array.Find(particles, p => p.particle == particle || p.particle.name == particle.name.Replace("(Clone)","")).type;
         pool[type].Enqueue(particle);

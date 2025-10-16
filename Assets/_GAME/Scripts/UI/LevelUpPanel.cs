@@ -9,21 +9,24 @@ public class LevelUpPanel : MonoBehaviour
     public static bool OPEN = false;
     [SerializeField] CanvasGroup canvasGroup;
     [SerializeField] List<UpgradeCard> cards;
-    void Awake()
-    {
-        OPEN = false;
-        canvasGroup.alpha = 0;
-        canvasGroup.interactable = false;
-        canvasGroup.blocksRaycasts = false;
-    }
+
     void OnEnable()
     {
         GameEventSystem.Instance.OnLevelUp += Show;
+        GameEventSystem.Instance.OnLevelLoadStarted += LevelLoadStarted;
     }
 
     void OnDisable()
     {
         GameEventSystem.Instance.OnLevelUp -= Show;
+        GameEventSystem.Instance.OnLevelLoadStarted -= LevelLoadStarted;
+    }
+    void LevelLoadStarted()
+    {
+        OPEN = false;
+        canvasGroup.alpha = 0;
+        canvasGroup.interactable = false;
+        canvasGroup.blocksRaycasts = false;
     }
 
     void Show()
@@ -33,8 +36,8 @@ public class LevelUpPanel : MonoBehaviour
         canvasGroup.interactable = true;
         canvasGroup.blocksRaycasts = true;
 
-        AskForUpgrades(); 
- 
+        AskForUpgrades();
+
     }
     void Hide(float delay)
     {

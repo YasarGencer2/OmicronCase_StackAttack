@@ -11,18 +11,26 @@ public class PlayerWeapons : MonoBehaviour
     public static PlayerWeapons Instance { get; private set; }
 
     [SerializeField] Transform weaponPunch;
-    [SerializeField] List<Weapon> weapons;
+    [SerializeField] List<Weapon> starterWeapons;
+    List<Weapon> weapons;
     public List<Weapon> Weapons => weapons;
     float tickTime;
 
     void Awake()
     {
         Instance = this;
-
-        weapons = weapons.Where(w => w != null).Select(w => Instantiate(w)).ToList();
     }
-    void Start()
+    void OnEnable()
     {
+        GameEventSystem.Instance.OnLevelLoadStarted += LevelLoadStarted;
+    }
+    void OnDisable()
+    {
+        GameEventSystem.Instance.OnLevelLoadStarted -= LevelLoadStarted;
+    }
+    void LevelLoadStarted()
+    {
+        weapons = starterWeapons.Where(w => w != null).Select(w => Instantiate(w)).ToList();
         tickTime = 0f;
         foreach (var item in weapons)
         {
@@ -89,7 +97,7 @@ public class PlayerWeapons : MonoBehaviour
     }
     void FireTween()
     {
-        if(weaponPunch == null)
+        if (weaponPunch == null)
             return;
         weaponPunch.DOKill();
         weaponPunch.localScale = Vector3.one;

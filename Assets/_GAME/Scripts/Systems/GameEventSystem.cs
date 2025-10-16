@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -17,4 +18,20 @@ public class GameEventSystem : MonoBehaviour
     public UnityAction OnLevelUp;
     public void Trigger_XPChange(int currentXP, int requiredXP) => OnXPChange?.Invoke(currentXP, requiredXP);
     public void Trigger_LevelUp() => OnLevelUp?.Invoke();
+
+    public UnityAction OnHealtLost;
+    public void Trigger_HealthLost() => OnHealtLost?.Invoke();
+
+    public UnityAction OnLevelCompleted;
+    public UnityAction OnLevelFailed;
+    public UnityAction<Level> OnLevelLoaded;
+    public UnityAction OnLevelLoadStarted;
+    public void Trigger_LevelCompleted() => OnLevelCompleted?.Invoke();
+    public void Trigger_LevelFailed() => OnLevelFailed?.Invoke();
+    public void Trigger_LevelLoaded(Level activeLevel) => OnLevelLoaded?.Invoke(activeLevel);
+    public void Trigger_LevelLoadStarted() => OnLevelLoadStarted?.Invoke();
+
+    public UnityAction OnFirstInput;
+    public void Trigger_FirstInput() => OnFirstInput?.Invoke();
+
 }

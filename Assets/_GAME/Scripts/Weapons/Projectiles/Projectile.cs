@@ -14,6 +14,18 @@ public class Projectile : MonoBehaviour
         transform.position = GameHelper.Instance.PTransform.position;
         Destroy(gameObject, weapon.Range / weapon.Speed);
     }
+    void OnEnable()
+    {
+        GameEventSystem.Instance.OnLevelLoadStarted += OnLevelLoadStarted;
+    }
+    void OnDisable()
+    {
+        GameEventSystem.Instance.OnLevelLoadStarted -= OnLevelLoadStarted;
+    }
+    private void OnLevelLoadStarted()
+    {
+        Destroy(gameObject);
+    }
     void OnTriggerEnter2D(Collider2D collider)
     { 
         Target target = collider.gameObject.GetComponentInParent<Target>();

@@ -23,7 +23,7 @@ public class Target : MonoBehaviour
     int requiredHealthForStackChange;
     int lastHealthBeforeStackChange;
 
-    void OnValidate()
+    public void Start()
     {
         SetStackAmount();
         SetHealth();
@@ -97,7 +97,7 @@ public class Target : MonoBehaviour
         if (health < 0)
             return;
         healthText.text = health.ToString();
-
+ 
         healthText.DOKill();
         healthText.transform.localScale = Vector3.one;
         healthText.transform.DOScale(Vector3.one * 1.2f, 0.1f).SetLoops(2, LoopType.Yoyo);
@@ -106,7 +106,7 @@ public class Target : MonoBehaviour
     {
         health -= damage;
         UpdateTopRenderer();
-        SetHealthText();
+        SetHealthText(); 
         PunchAll();
         TryDie();
     }
@@ -151,6 +151,8 @@ public class Target : MonoBehaviour
         transform.localScale = Vector3.one;
         transform.DOScaleY(1.1f, 0.1f).OnComplete(() =>
         {
+            if (transform == null)
+                return;
             transform.DOScaleY(1f, 0.1f);
         });
     }
