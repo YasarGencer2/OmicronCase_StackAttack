@@ -1,16 +1,20 @@
 using System;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UpgradeCard : MonoBehaviour
 {
+    [SerializeField] CanvasGroup canvasGroup;
     [SerializeField] Image icon;
     [SerializeField] TextMeshProUGUI title, desc;
     [SerializeField] Button button;
-    public void SetUpgrade(WeaponUpgrade weaponUpgrade, Action onCardSelected)
+    public void SetUpgrade(WeaponUpgrade weaponUpgrade, Action<UpgradeCard> onCardSelected)
     {
+        canvasGroup.alpha = 1;
         icon.sprite = weaponUpgrade.Weapon.Icon;
+        transform.localScale = Vector3.one;
         SetTexts(weaponUpgrade);
         SetButton(onCardSelected, weaponUpgrade);
     }
@@ -49,13 +53,21 @@ public class UpgradeCard : MonoBehaviour
                 break;
         }
     }
-    void SetButton(Action onCardSelected, WeaponUpgrade upgrade)
+    void SetButton(Action<UpgradeCard> onCardSelected, WeaponUpgrade upgrade)
     {
         button.onClick.RemoveAllListeners();
+        button.interactable = true;
         button.onClick.AddListener(() =>
         {
-            onCardSelected?.Invoke();
+            onCardSelected?.Invoke(this);
             GameHelper.Instance.PWeapons.Upgrade(upgrade);
+            button.interactable = false;
+            transform.DOScale(1.3f, 0.2f);
         });
+    }
+    public void Hide()
+    {
+        canvasGroup.DOFade(.2f, 0.2f);
+        button.interactable = false;
     }
 }

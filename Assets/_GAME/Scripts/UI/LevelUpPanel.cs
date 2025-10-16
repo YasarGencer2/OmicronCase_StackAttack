@@ -33,14 +33,17 @@ public class LevelUpPanel : MonoBehaviour
         canvasGroup.interactable = true;
         canvasGroup.blocksRaycasts = true;
 
-        AskForUpgrades();
+        AskForUpgrades(); 
+ 
     }
-    void Hide()
+    void Hide(float delay)
     {
         OPEN = false;
-        canvasGroup.DOFade(0, 0.25f);
-        canvasGroup.interactable = false;
-        canvasGroup.blocksRaycasts = false;
+        canvasGroup.DOFade(0, 0.25f).SetDelay(delay).OnComplete(() =>
+        {
+            canvasGroup.interactable = false;
+            canvasGroup.blocksRaycasts = false;
+        });
     }
 
 
@@ -56,9 +59,13 @@ public class LevelUpPanel : MonoBehaviour
             cards[i].SetUpgrade(upgrades[i], OnCardSelected);
         }
     }
-    void OnCardSelected()
+    void OnCardSelected(UpgradeCard card)
     {
-        Hide();
-        
-    }   
+        foreach (var item in cards)
+        {
+            if (card != item)
+                item.Hide();
+        }
+        Hide(.5f);
+    }
 }

@@ -12,7 +12,7 @@ public class Projectile : MonoBehaviour
         this.Weapon = weapon;
         pierce = Mathf.FloorToInt(weapon.Pierce);
         transform.position = GameHelper.Instance.PTransform.position;
-        // Destroy(gameObject, weapon.range / weapon.speed);
+        Destroy(gameObject, weapon.Range / weapon.Speed);
     }
     void OnTriggerEnter2D(Collider2D collider)
     { 

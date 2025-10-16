@@ -7,6 +7,7 @@ public class GameHelper : MonoBehaviour
     public Transform PTransform;
     public PlayerWeapons PWeapons;
     public WeaponsList AllWeapons;
+    public  TargetColors TargetColors;
     
     void Awake()
     {

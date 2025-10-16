@@ -237,6 +237,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3650441073711787166}
   - component: {fileID: 7238173802579936632}
+  - component: {fileID: 625004647794097593}
   m_Layer: 0
   m_Name: Upgrade Card
   m_TagString: Untagged
@@ -279,10 +280,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a55b4deb7676a4f41a0675793723e125, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvasGroup: {fileID: 625004647794097593}
   icon: {fileID: 6683105797536249058}
   title: {fileID: 2659802582965031591}
   desc: {fileID: 1366471724173121134}
   button: {fileID: 4871624615782638523}
+--- !u!225 &625004647794097593
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5414129010177171603}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &5537079036334479757
 GameObject:
   m_ObjectHideFlags: 0

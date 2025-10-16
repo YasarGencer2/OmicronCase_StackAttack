@@ -2,13 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine; 
+using DG.Tweening;
+using UnityEngine;
 
 
 public class PlayerWeapons : MonoBehaviour
 {
     public static PlayerWeapons Instance { get; private set; }
 
+    [SerializeField] Transform weaponPunch;
     [SerializeField] List<Weapon> weapons;
     public List<Weapon> Weapons => weapons;
     float tickTime;
@@ -36,11 +38,14 @@ public class PlayerWeapons : MonoBehaviour
     }
     void TryFireAll()
     {
-        foreach (var weapon in weapons)
+        for (int i = 0; i < weapons.Count; i++)
         {
+            var weapon = weapons[i];
             if (weapon.TryFire(tickTime))
             {
                 weapon.Fire();
+                if (i == 0)
+                    FireTween();
             }
         }
     }
@@ -61,26 +66,34 @@ public class PlayerWeapons : MonoBehaviour
             var upgradeAmount = upgrade.IsPercent ? upgrade.Amount / 100f : upgrade.Amount;
             switch (upgrade.Type)
             {
-                case WeaponUpgradeTypes.Damage: 
+                case WeaponUpgradeTypes.Damage:
                     weapon.DamageBoost += upgradeAmount;
                     break;
-                case WeaponUpgradeTypes.Range: 
+                case WeaponUpgradeTypes.Range:
                     weapon.RangeBoost += upgradeAmount;
                     break;
-                case WeaponUpgradeTypes.FireRate: 
+                case WeaponUpgradeTypes.FireRate:
                     weapon.FireRateBoost += upgradeAmount;
                     break;
-                case WeaponUpgradeTypes.Speed: 
+                case WeaponUpgradeTypes.Speed:
                     weapon.SpeedBoost += upgradeAmount;
                     break;
-                case WeaponUpgradeTypes.ProjectileCount: 
+                case WeaponUpgradeTypes.ProjectileCount:
                     weapon.ProjectileCountBoost += upgradeAmount;
                     break;
-                case WeaponUpgradeTypes.Pierce: 
+                case WeaponUpgradeTypes.Pierce:
                     weapon.PierceBoost += upgradeAmount;
                     break;
             }
         }
+    }
+    void FireTween()
+    {
+        if(weaponPunch == null)
+            return;
+        weaponPunch.DOKill();
+        weaponPunch.localScale = Vector3.one;
+        weaponPunch.DOPunchScale(Vector3.one * -0.2f, 0.2f, 1, 0);
     }
 }
 

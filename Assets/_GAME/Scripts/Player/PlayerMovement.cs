@@ -7,8 +7,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float sidewaysSpeedMultiplier = 1f;
     Camera cam => Camera.main;
     Vector3 offset;
-    bool dragging;
+    bool dragging; 
 
+    void Start()
+    {
+        StartTrailMovement();
+    }
     void Update()
     {
         if (GameHelper.Instance.IsGamePlaying() == false)
@@ -45,5 +49,9 @@ public class PlayerMovement : MonoBehaviour
         var mousePos = Input.mousePosition;
         mousePos.z = cam.WorldToScreenPoint(transform.position).z;
         return cam.ScreenToWorldPoint(mousePos);
+    }
+    void StartTrailMovement()
+    {
+
     }
 }

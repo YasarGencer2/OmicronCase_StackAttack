@@ -3,10 +3,10 @@ using UnityEngine;
 
 public class PlayerLevel : MonoBehaviour
 {
-    int currentLevel = 0;
-    int xpPoints = 0;
-    int requiredXP = 5;
-    int xpIncrementPercentage = 20;
+    [SerializeField] int currentLevel = 0;
+    [SerializeField] int xpPoints = 0;
+    [SerializeField] int requiredXP = 5;
+    [SerializeField] int xpIncrementPercentage = 20;
 
     void OnEnable()
     {
