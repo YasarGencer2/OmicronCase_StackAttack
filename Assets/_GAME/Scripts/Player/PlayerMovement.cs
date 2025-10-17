@@ -95,7 +95,7 @@ public class PlayerMovement : MonoBehaviour
         GameEventSystem.Instance.Trigger_FirstInput();
         Dash();
     }
-    void Dash()
+    public void Dash()
     {
         currentForwardSpeed = forwwardSpeed * 10;
         DOTween.To(() => currentForwardSpeed, x => currentForwardSpeed = x, forwwardSpeed, 1f).SetEase(Ease.OutSine);

@@ -24,5 +24,9 @@ public class DevShortCuts : MonoBehaviour
         {
             GameEventSystem.Instance.Trigger_TargetKilled();
         }
+        if(Input.GetKeyDown(KeyCode.D))
+        {
+            GameHelper.Instance.PMovemet.Dash();
+        }
     }
 }

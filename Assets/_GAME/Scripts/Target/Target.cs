@@ -72,6 +72,7 @@ public class Target : MonoBehaviour
             }
             var stack = stacks[stackIndex];
             stack.transform.localScale = Vector3.one;
+            stack.gameObject.SetActive(true);
             lastR = stack;
         }
         for (int i = stack; i < stacks.Count; i++)

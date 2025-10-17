@@ -17,7 +17,7 @@ MonoBehaviour:
   prefab: {fileID: 7418188178447760204, guid: 4bf38b1779900498da4dad2577b7c7b8, type: 3}
   damage: 1
   range: 10
-  fireRate: 0.5
+  fireRate: 1
   speed: 15
   projectileCount: 1
   pierce: 1000

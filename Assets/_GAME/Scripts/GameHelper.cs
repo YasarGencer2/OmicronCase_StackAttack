@@ -4,8 +4,10 @@ using UnityEngine;
 public class GameHelper : MonoBehaviour
 {
     public static GameHelper Instance { get; private set; }
+    public float DespawnY => PTransform.position.y - 6f;
 
     public Transform PTransform;
+    public PlayerMovement PMovemet;
     public PlayerWeapons PWeapons;
     public WeaponsList AllWeapons;
     public WeaponUpgradeDatas AllUpgrades;

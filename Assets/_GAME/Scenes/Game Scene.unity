@@ -4798,9 +4798,9 @@ MonoBehaviour:
   nonLoopingLevels: {fileID: 11400000, guid: 6aea6520fd9064431abeec978a3e4a45, type: 2}
   loopingLevels: {fileID: 11400000, guid: 91bbd66a3d8be461da82b1bc5d90bd2a, type: 2}
   levelParent: {fileID: 4401154}
-  activeLevel: {fileID: 0}
   rowPrefab: {fileID: 5327877220410450533, guid: 307956706173540999155bf53140cce8, type: 3}
   rowSpacing: 1.3
+  poolSize: 20
 --- !u!1 &1765647277
 GameObject:
   m_ObjectHideFlags: 0
@@ -5104,6 +5104,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PTransform: {fileID: 918361856}
+  PMovemet: {fileID: 918361857}
   PWeapons: {fileID: 918361858}
   AllWeapons: {fileID: 11400000, guid: 758149393b7e74d3d9ff8136989c9bcf, type: 2}
   AllUpgrades: {fileID: 11400000, guid: 9f54938cbf24d4f098a145798975f8bc, type: 2}

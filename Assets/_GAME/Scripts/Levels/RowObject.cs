@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using DG.Tweening;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class RowObject : MonoBehaviour
@@ -10,9 +11,15 @@ public class RowObject : MonoBehaviour
 
     Tween moveT;
 
-    public void Set(Row row, Vector3 origin)
+    public Action<RowObject> Die { get; internal set; }
+
+    public void Deactivate()
     {
+        gameObject.SetActive(false);
         Reset();
+    }
+    public void Set(Row row, Vector3 origin)
+    { 
         if (row == null)
             return;
         if (row.rowHelpers == null)
@@ -32,19 +39,33 @@ public class RowObject : MonoBehaviour
             tg.SetData(rowHelper.stack, rowHelper.color);
             tg.Start();
         }
+        gameObject.SetActive(true);
+    }
+    void Update()
+    {
+        if(transform.position.y < GameHelper.Instance.DespawnY)
+        { 
+            Die?.Invoke(this);
+        }
     }
     void OnEnable()
     {
         GameEventSystem.Instance.OnLevelUp += Pause;
         GameEventSystem.Instance.OnCardSelected += UnPause;
+        GameEventSystem.Instance.OnLevelLoadStarted += LevelLoadStarted;
     }
     void OnDisable()
     {
         GameEventSystem.Instance.OnLevelUp -= Pause;
         GameEventSystem.Instance.OnCardSelected -= UnPause;
+        GameEventSystem.Instance.OnLevelLoadStarted -= LevelLoadStarted;
+    }
+    void LevelLoadStarted()
+    {
+        Die?.Invoke(this);
     }
     void Pause()
-    { 
+    {
         moveT?.Pause();
     }
     void UnPause(UpgradeCard arg0)
