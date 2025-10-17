@@ -23,6 +23,11 @@ public class Target : MonoBehaviour
     int requiredHealthForStackChange;
     int lastHealthBeforeStackChange;
 
+    public void SetData(int health, TargetColor color)
+    {
+        this.health = health;
+        this.color = color; 
+    }
     public void Start()
     {
         SetStackAmount();

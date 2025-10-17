@@ -12,7 +12,9 @@ public class LevelManager : MonoBehaviour
     [SerializeField] LevelList nonLoopingLevels;
     [SerializeField] LevelList loopingLevels;
     [SerializeField] Transform levelParent;
-    [SerializeField] Level activeLevel; 
+    [SerializeField] GameObject activeLevel;
+    [SerializeField] RowObject rowPrefab;
+    [SerializeField] float rowSpacing;
 
     void Awake()
     {
@@ -26,26 +28,50 @@ public class LevelManager : MonoBehaviour
     void DostroyActiveLevel()
     {
         if (activeLevel != null)
-            Destroy(activeLevel.gameObject);
+            Destroy(activeLevel);
     }
     public void LoadLevel(int index)
     {
         GameEventSystem.Instance.Trigger_LevelLoadStarted();
         DostroyActiveLevel();
         activeLevel = GetLevel(index);
-        GameEventSystem.Instance.Trigger_LevelLoaded(activeLevel);
+        GameEventSystem.Instance.Trigger_LevelLoaded();
     }
-    Level GetLevel(int index)
+    GameObject GetLevel(int index)
     {
-        Level level;
+        GameObject level;
         if (index < nonLoopingLevels.Levels.Count)
-            level = Instantiate(nonLoopingLevels.Levels[index], levelParent);
+            level = CreateLevel(nonLoopingLevels.Levels[index]);
         else
         {
             int loopedIndex = (index - nonLoopingLevels.Levels.Count) % loopingLevels.Levels.Count;
-            level = Instantiate(loopingLevels.Levels[loopedIndex], levelParent);
+            level = CreateLevel(loopingLevels.Levels[loopedIndex]);
         }
-        activeLevel = level;
         return level;
+    }
+    GameObject CreateLevel(Level level)
+    {
+        GameObject levelGO = new GameObject($"Level_{VisualLevel}");
+        levelGO.transform.SetParent(levelParent, false);
+        levelGO.transform.localPosition = Vector3.zero;
+        activeLevel = levelGO;
+        CreateRows(level);
+        return levelGO;
+    }
+    void CreateRows(Level level)
+    {
+        int index = 0;
+        foreach (var row in level.Rows)
+        {
+            CreateRow(row, index);
+            index++;
+        }
+    }
+    void CreateRow(Row row, int index)
+    {
+        var rowOBject = Instantiate(rowPrefab);
+        rowOBject.gameObject.transform.SetParent(activeLevel.transform, false);
+        var origin = new Vector3(0f, index * rowSpacing, 0f);
+        rowOBject.Set(row, origin);
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using DG.Tweening;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -6,10 +7,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float forwwardSpeed;
     [SerializeField] float sidewaysSpeedMultiplier = 1f;
     [SerializeField] TrailRenderer trail;
+
     Camera cam => Camera.main;
     Vector3 offset;
     bool dragging;
     bool didFirstInput = false;
+
+    float currentForwardSpeed;
 
 
     void OnEnable()
@@ -19,9 +23,10 @@ public class PlayerMovement : MonoBehaviour
     void OnDisable()
     {
         GameEventSystem.Instance.OnLevelLoadStarted -= OnLevelLoadStarted;
-    } 
+    }
     private void OnLevelLoadStarted()
     {
+        currentForwardSpeed = forwwardSpeed;
         didFirstInput = false;
         dragging = false;
         offset = Vector3.zero;
@@ -42,7 +47,7 @@ public class PlayerMovement : MonoBehaviour
     }
     void ForwardMovement()
     {
-        transform.Translate(Vector3.up * forwwardSpeed * Time.deltaTime);
+        transform.Translate(Vector3.up * currentForwardSpeed * Time.deltaTime);
     }
     void SidewaysMovement()
     {
@@ -65,8 +70,7 @@ public class PlayerMovement : MonoBehaviour
         dragging = true;
         if (didFirstInput == false)
         {
-            didFirstInput = true;
-            GameEventSystem.Instance.Trigger_FirstInput();
+            FirstTouch();
         }
     }
     void StopDrag()
@@ -85,8 +89,15 @@ public class PlayerMovement : MonoBehaviour
         mousePos.z = cam.WorldToScreenPoint(transform.position).z;
         return cam.ScreenToWorldPoint(mousePos);
     }
-    void StartTrailMovement()
+    void FirstTouch()
     {
-
+        didFirstInput = true;
+        GameEventSystem.Instance.Trigger_FirstInput();
+        Dash();
+    }
+    void Dash()
+    {
+        currentForwardSpeed = forwwardSpeed * 10;
+        DOTween.To(() => currentForwardSpeed, x => currentForwardSpeed = x, forwwardSpeed, 1f).SetEase(Ease.OutSine);
     }
 }

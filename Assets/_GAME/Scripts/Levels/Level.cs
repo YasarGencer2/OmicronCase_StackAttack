@@ -1,13 +1,7 @@
 using UnityEngine;
 
-public class Level : MonoBehaviour
+[CreateAssetMenu(fileName = "Level", menuName = "Level", order = 1)]
+public class Level : ScriptableObject
 {
-    public void ValidateAllTargets()
-    {
-        Target[] targets = GetComponentsInChildren<Target>(true);
-        foreach (Target target in targets)
-        {
-            target.Start();
-        }
-    }
+    public Row[] Rows;
 }

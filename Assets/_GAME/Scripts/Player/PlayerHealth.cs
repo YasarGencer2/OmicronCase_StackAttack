@@ -10,7 +10,7 @@ public class PlayerHealth : MonoBehaviour
     int currentHealth;
     float invincibilityTimer;
 
-    private void OnLevelLoaded(Level arg0)
+    private void OnLevelLoaded()
     {
         currentHealth = startHealth;
         invincibilityTimer = 0;

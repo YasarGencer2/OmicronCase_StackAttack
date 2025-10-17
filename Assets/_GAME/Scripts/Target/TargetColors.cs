@@ -21,6 +21,10 @@ public struct ColorData
 }
 public enum TargetColor
 {
+    None = 0,
     Blue = 1,
     Purple = 2,
+    Pink = 3,
+    SkyBlue = 4,
+    Lime = 5,
 }

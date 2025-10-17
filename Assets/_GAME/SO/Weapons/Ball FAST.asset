@@ -16,13 +16,14 @@ MonoBehaviour:
   Icon: {fileID: -1754994274, guid: b7fc302aa4ce44068ab9a5a3b420ecf5, type: 3}
   prefab: {fileID: 6036983710768704133, guid: 81689f342b43843d684ec84cca51f488, type: 3}
   damage: 1
-  range: 1
+  range: 5
   fireRate: 10
   speed: 5
   projectileCount: 1
-  Pierce: 1
+  pierce: 1
   DamageBoost: 1
   RangeBoost: 1
   FireRateBoost: 1
   SpeedBoost: 1
   ProjectileCountBoost: 0
+  PierceBoost: 0
