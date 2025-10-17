@@ -17,7 +17,6 @@ public class Rocket : Projectile
         targetAngle = 0f;
         direction = Quaternion.Euler(0, 0, angle) * Vector3.up;
         exploded = false;
-        print(totalAliveTime);
         Invoke("Explode", totalAliveTime);
     }
 
@@ -35,7 +34,6 @@ public class Rocket : Projectile
     }
     void Explode()
     {
-        print("Explode");
         if (exploded)
             return;
         exploded = true;

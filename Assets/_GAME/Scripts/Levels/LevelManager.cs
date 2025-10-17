@@ -12,15 +12,19 @@ public class LevelManager : MonoBehaviour
     }
     [SerializeField] LevelList nonLoopingLevels;
     [SerializeField] LevelList loopingLevels;
+
+    [Space(5)]
     [SerializeField] Transform levelParent;
     [SerializeField] RowObject rowPrefab;
     [SerializeField] float rowSpacing;
 
+    [Space(5)]
     [SerializeField] int poolSize = 20;
     private Queue<RowObject> pool = new Queue<RowObject>();
     int lastCreatedIndex = 0;
 
     Level activeLevel;
+    GameObject activeCustom;
 
     void Awake()
     {
@@ -30,17 +34,11 @@ public class LevelManager : MonoBehaviour
     {
         LoadCurrentLevel();
     }
-    void InitializePool()
-    {
-        for (int i = pool.Count; i < poolSize; i++)
-        {
-            var obj = GetFromPool();
-            pool.Enqueue(obj);
-        }
-    }
     public void LoadCurrentLevel() => LoadLevel(CurrentLevel);
     public void LoadLevel(int index)
     {
+        if (activeCustom != null)
+            Destroy(activeCustom);
         GameEventSystem.Instance.Trigger_LevelLoadStarted();
         Load(index);
         GameEventSystem.Instance.Trigger_LevelLoaded();
@@ -55,10 +53,12 @@ public class LevelManager : MonoBehaviour
             activeLevel = loopingLevels.Levels[loopedIndex];
         }
         CreateRows();
+        activeCustom = Instantiate(activeLevel.Custom, levelParent);
+        Debug.Log($"active custom" + activeCustom.name, activeCustom);
     }
     void CreateRows()
-    {
-        for (int i = 0; i < poolSize; i++)
+    { 
+        for (int i = 0; i < Mathf.Min(poolSize, activeLevel.Rows.Length); i++)
         {
             var row = activeLevel.Rows[i];
             CreateRow(row, i);

@@ -13,16 +13,26 @@ public class Projectile : MonoBehaviour
     protected float totalAliveTime = 0f;
     protected bool autoKill = true;
 
+    Coroutine autoDieCoroutine;
+
     public virtual void Initialize(Weapon weapon, Vector3 offset)
     {
+        StopAllCoroutines();
         this.Weapon = weapon;
         pierce = Mathf.FloorToInt(weapon.Pierce);
         trail.emitting = false;
         transform.position = GameHelper.Instance.PTransform.position + offset;
         trail.Clear();
         trail.emitting = true;
-        totalAliveTime = totalAliveTime == 0 ? weapon.Range / weapon.Speed : totalAliveTime; 
+        totalAliveTime = totalAliveTime == 0 ? weapon.Range / weapon.Speed : totalAliveTime;
         DestroyOnComlpete();
+        Die += OnDie;
+    }
+    void OnDie(Projectile proj)
+    {
+        print("Projectile Died");
+        if (autoDieCoroutine != null)
+            GameHelper.Instance.StopCoroutine(autoDieCoroutine);
     }
     void DestroyOnComlpete()
     {
@@ -31,7 +41,7 @@ public class Projectile : MonoBehaviour
     }
     protected void AutoDie(float time)
     {
-        GameHelper.Instance.StartCoroutine(LocalDelay());
+        autoDieCoroutine = GameHelper.Instance.StartCoroutine(LocalDelay());
         IEnumerator LocalDelay()
         {
             yield return new WaitForSeconds(time);

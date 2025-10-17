@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62b5ac671e6434f2783ba54b5998e3da, type: 3}
   m_Name: Level1
   m_EditorClassIdentifier: 
+  Custom: {fileID: 7713787335006018293, guid: 497efdadb1ad444a395322afb85e3060, type: 3}
   Rows:
   - rowHelpers:
     - stack: 0

@@ -102,8 +102,8 @@ public class Weapon : ScriptableObject
     Projectile CreateProjectile(Vector3 offset)
     {
         var projectile = GetFromPool();
-        projectile.Initialize(this, offset);
         projectile.Die = ReturnToPool;
+        projectile.Initialize(this, offset);
         return projectile;
     }
 
