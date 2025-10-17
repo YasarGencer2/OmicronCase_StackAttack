@@ -1,6 +1,7 @@
 using System;
 using DG.Tweening;
 using TMPro;
+using UnityEditor.Tilemaps;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,52 +9,60 @@ public class UpgradeCard : MonoBehaviour
 {
     [SerializeField] CanvasGroup canvasGroup;
     [SerializeField] Image icon;
-    [SerializeField] TextMeshProUGUI title, desc;
+    [SerializeField] TextMeshProUGUI title, desc, rarity;
     [SerializeField] Button button;
-    public void SetUpgrade(WeaponUpgrade weaponUpgrade, Action<UpgradeCard> onCardSelected)
+    [SerializeField] Image bg;
+    [SerializeField] RarityColors[] rarityColors;
+    public void SetUpgrade(WeaponUpgradeWrapper weaponUpgrade, Action<UpgradeCard> onCardSelected)
     {
-        canvasGroup.alpha = 1;
-        icon.sprite = weaponUpgrade.Weapon.Icon;
-        transform.localScale = Vector3.one;
+        SetGeneral(weaponUpgrade);
         SetTexts(weaponUpgrade);
         SetButton(onCardSelected, weaponUpgrade);
+        SetColor(weaponUpgrade);
     }
-    void SetTexts(WeaponUpgrade weaponUpgrade)
+    void SetGeneral(WeaponUpgradeWrapper upgrade)
     {
-        var name = weaponUpgrade.Weapon.Name;
-        switch (weaponUpgrade.Type)
+        canvasGroup.alpha = 1;
+        icon.sprite = upgrade.Weapon.Icon;
+        transform.localScale = Vector3.one;
+        rarity.text = upgrade.Rarity.ToString().ToUpper();
+    }
+    void SetTexts(WeaponUpgradeWrapper upgrade)
+    {
+        var name = upgrade.Weapon.Name;
+        switch (upgrade.Type)
         {
-            case WeaponUpgradeTypes.Unlock:
-                title.text = $"UNLOCK {name}";
-                desc.text = "";
+            case WUType.Unlock:
+                title.text = $"UNLOCK";
+                desc.text = $"{name}";
                 break;
-            case WeaponUpgradeTypes.Damage:
+            case WUType.Damage:
                 title.text = $"DAMAGE";
-                desc.text = weaponUpgrade.IsPercent ? $"+{weaponUpgrade.Amount}%" : $"+{weaponUpgrade.Amount}";
+                desc.text = upgrade.IsPercent ? $"+{upgrade.Amount}%" : $"+{upgrade.Amount}";
                 break;
-            case WeaponUpgradeTypes.Range:
+            case WUType.Range:
                 title.text = $"RANGE";
-                desc.text = weaponUpgrade.IsPercent ? $"+{weaponUpgrade.Amount}%" : $"+{weaponUpgrade.Amount}";
+                desc.text = upgrade.IsPercent ? $"+{upgrade.Amount}%" : $"+{upgrade.Amount}";
                 break;
-            case WeaponUpgradeTypes.FireRate:
+            case WUType.FireRate:
                 title.text = $"FIRE RATE";
-                desc.text = weaponUpgrade.IsPercent ? $"+{weaponUpgrade.Amount}%" : $"+{weaponUpgrade.Amount}";
+                desc.text = upgrade.IsPercent ? $"+{upgrade.Amount}%" : $"+{upgrade.Amount}";
                 break;
-            case WeaponUpgradeTypes.Speed:
+            case WUType.Speed:
                 title.text = $"SPEED";
-                desc.text = weaponUpgrade.IsPercent ? $"+{weaponUpgrade.Amount}%" : $"+{weaponUpgrade.Amount}";
+                desc.text = upgrade.IsPercent ? $"+{upgrade.Amount}%" : $"+{upgrade.Amount}";
                 break;
-            case WeaponUpgradeTypes.ProjectileCount:
+            case WUType.ProjectileCount:
                 title.text = $"PROJECTILE COUNT";
-                desc.text = weaponUpgrade.IsPercent ? $"+{weaponUpgrade.Amount}%" : $"+{weaponUpgrade.Amount}";
+                desc.text = upgrade.IsPercent ? $"+{upgrade.Amount}%" : $"+{upgrade.Amount}";
                 break;
-            case WeaponUpgradeTypes.Pierce:
+            case WUType.Pierce:
                 title.text = $"PIERCE";
-                desc.text = weaponUpgrade.IsPercent ? $"+{weaponUpgrade.Amount}%" : $"+{weaponUpgrade.Amount}";
+                desc.text = upgrade.IsPercent ? $"+{upgrade.Amount}%" : $"+{upgrade.Amount}";
                 break;
         }
     }
-    void SetButton(Action<UpgradeCard> onCardSelected, WeaponUpgrade upgrade)
+    void SetButton(Action<UpgradeCard> onCardSelected, WeaponUpgradeWrapper upgrade)
     {
         button.onClick.RemoveAllListeners();
         button.interactable = true;
@@ -65,9 +74,26 @@ public class UpgradeCard : MonoBehaviour
             transform.DOScale(1.3f, 0.2f);
         });
     }
+    void SetColor(WeaponUpgradeWrapper upgrade)
+    {
+        foreach (var rc in rarityColors)
+        {
+            if (rc.Rarity == upgrade.Rarity)
+            {
+                bg.color = rc.Color;
+                return;
+            }
+        }
+    }
     public void Hide()
     {
         canvasGroup.DOFade(.2f, 0.2f);
         button.interactable = false;
     }
+}
+[System.Serializable]
+public struct RarityColors
+{
+    public WURarity Rarity;
+    public Color Color;
 }

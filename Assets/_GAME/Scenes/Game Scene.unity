@@ -2211,6 +2211,7 @@ MonoBehaviour:
   weaponPunch: {fileID: 385358897}
   starterWeapons:
   - {fileID: 11400000, guid: ef93232e14c3349638968a396e0b951f, type: 2}
+  weapons: []
 --- !u!114 &918361859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3288,8 +3289,8 @@ CanvasGroup:
   m_GameObject: {fileID: 1310287182}
   m_Enabled: 1
   m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!114 &1310287185
 MonoBehaviour:
@@ -5105,6 +5106,7 @@ MonoBehaviour:
   PTransform: {fileID: 918361856}
   PWeapons: {fileID: 918361858}
   AllWeapons: {fileID: 11400000, guid: 758149393b7e74d3d9ff8136989c9bcf, type: 2}
+  AllUpgrades: {fileID: 11400000, guid: 9f54938cbf24d4f098a145798975f8bc, type: 2}
   TargetColors: {fileID: 11400000, guid: 8e27a532cbcf644ee82de04ef9a2714a, type: 2}
 --- !u!1 &2031819510
 GameObject:

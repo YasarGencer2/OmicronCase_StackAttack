@@ -55,7 +55,7 @@ public class LevelUpPanel : MonoBehaviour
         var upgrades = WeaponUpgrades.GenerateUpgrades(cards.Count);
         CreateCards(upgrades);
     }
-    void CreateCards(List<WeaponUpgrade> upgrades)
+    void CreateCards(List<WeaponUpgradeWrapper> upgrades)
     {
         for (int i = 0; i < cards.Count; i++)
         {

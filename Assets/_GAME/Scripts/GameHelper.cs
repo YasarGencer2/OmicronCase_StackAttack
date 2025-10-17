@@ -8,6 +8,7 @@ public class GameHelper : MonoBehaviour
     public Transform PTransform;
     public PlayerWeapons PWeapons;
     public WeaponsList AllWeapons;
+    public WeaponUpgradeDatas AllUpgrades;
     public TargetColors TargetColors;
 
     bool didFirstInput = false;

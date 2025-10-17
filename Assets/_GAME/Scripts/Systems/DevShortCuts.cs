@@ -20,5 +20,9 @@ public class DevShortCuts : MonoBehaviour
             LevelManager.CurrentLevel = Mathf.Max(0, LevelManager.CurrentLevel);
             LevelManager.Instance.LoadCurrentLevel();
         }
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            GameEventSystem.Instance.Trigger_TargetKilled();
+        }
     }
 }

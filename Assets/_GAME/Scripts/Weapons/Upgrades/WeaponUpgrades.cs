@@ -5,65 +5,32 @@ using UnityEngine;
 
 public class WeaponUpgrades : MonoBehaviour
 {
-    public static List<WeaponUpgrade> GenerateUpgrades(int count)
+    public static List<WeaponUpgradeWrapper> GenerateUpgrades(int count)
     {
-        List<WeaponUpgrade> upgrades = new List<WeaponUpgrade>();
-        var doUnlock = UnlockWeapon();
+        List<WeaponUpgradeWrapper> upgrades = new List<WeaponUpgradeWrapper>();
+        var doUnlock = TryUnlockWeapon();
         if (doUnlock != null)
         {
-            upgrades.Add(doUnlock.Value);
+            upgrades.Add(doUnlock);
             count--;
         }
         for (int i = 0; i < count; i++)
         {
-            var upgrade = GenerateRandomUpgrade(upgrades);
+            var upgrade = GenerateRandomUpgrade();
             upgrades.Add(upgrade);
         }
         upgrades = upgrades.OrderBy(x => UnityEngine.Random.value).ToList();
         return upgrades;
     }
 
-    private static WeaponUpgrade GenerateRandomUpgrade(List<WeaponUpgrade> upgrades)
+    private static WeaponUpgradeWrapper GenerateRandomUpgrade()
     {
         var weapon = GetUpgradableWeapon();
-        WeaponUpgrade upgrade = WeaponToUpgrade(weapon);
-
-        WeaponUpgradeTypes type;
-        do
-            type = (WeaponUpgradeTypes)UnityEngine.Random.Range(1, Enum.GetNames(typeof(WeaponUpgradeTypes)).Length);
-        while (upgrades.Exists(x => x.Type == type)); 
-        upgrade.Type = type;
-
-        switch (type)
-        {
-            case WeaponUpgradeTypes.Damage:
-                upgrade.Amount = UnityEngine.Random.Range(5, 15);
-                upgrade.IsPercent = true;
-                break;
-            case WeaponUpgradeTypes.Range:
-                upgrade.Amount = UnityEngine.Random.Range(5, 15);
-                upgrade.IsPercent = true;
-                break;
-            case WeaponUpgradeTypes.FireRate:
-                upgrade.Amount = UnityEngine.Random.Range(5, 15);
-                upgrade.IsPercent = true;
-                break;
-            case WeaponUpgradeTypes.Speed:
-                upgrade.Amount = UnityEngine.Random.Range(5, 15);
-                upgrade.IsPercent = true;
-                break;
-            case WeaponUpgradeTypes.ProjectileCount:
-                upgrade.Amount = 1;
-                upgrade.IsPercent = false;
-                break;
-            case WeaponUpgradeTypes.Pierce:
-                upgrade.Amount = 1;
-                upgrade.IsPercent = false;
-                break;
-        }
+        var upgrade = SetRandomUpgrade(weapon); 
         return upgrade;
     }
-    static WeaponUpgrade? UnlockWeapon()
+
+    static WeaponUpgradeWrapper TryUnlockWeapon()
     {
         if (UnityEngine.Random.Range(0, 100) > 70)
             return null;
@@ -72,15 +39,7 @@ public class WeaponUpgrades : MonoBehaviour
             return null;
         return WeaponToUpgrade(weapon);
     }
-    static WeaponUpgrade WeaponToUpgrade(Weapon weapon)
-    {
-        WeaponUpgrade upgrade = new WeaponUpgrade();
-        upgrade.Weapon = weapon;
-        upgrade.Type = WeaponUpgradeTypes.Unlock;
-        upgrade.Amount = 0;
-        upgrade.IsPercent = false;
-        return upgrade;
-    }
+
     static Weapon GetUpgradableWeapon()
     {
         var playerWeapons = GameHelper.Instance.PWeapons.Weapons;
@@ -100,22 +59,21 @@ public class WeaponUpgrades : MonoBehaviour
         var random = UnityEngine.Random.Range(0, unlockableWeapons.Count);
         return unlockableWeapons[random];
     }
-}
-
-public struct WeaponUpgrade
-{
-    public Weapon Weapon;
-    public WeaponUpgradeTypes Type;
-    public float Amount;
-    public bool IsPercent;
-}
-public enum WeaponUpgradeTypes
-{
-    Unlock = 0,
-    Damage = 1,
-    Range = 2,
-    FireRate = 3,
-    Speed = 4,
-    ProjectileCount = 5,
-    Pierce = 6,
+    static WeaponUpgradeWrapper WeaponToUpgrade(Weapon weapon)
+    {
+        WeaponUpgradeWrapper upgrade = new WeaponUpgradeWrapper();
+        upgrade.Weapon = weapon;
+        upgrade.Type = WUType.Unlock;
+        upgrade.Rarity = WURarity.Legendary;
+        upgrade.Amount = 0;
+        upgrade.IsPercent = false;
+        return upgrade;
+    }
+    static WeaponUpgradeWrapper SetRandomUpgrade(Weapon weapon)
+    {
+        var upgrade = WeaponToUpgrade(weapon);
+        var upgradeDatas = GameHelper.Instance.AllUpgrades;
+        upgrade = upgradeDatas.GetRandomUpgrade(weapon);
+        return upgrade;
+    }
 }

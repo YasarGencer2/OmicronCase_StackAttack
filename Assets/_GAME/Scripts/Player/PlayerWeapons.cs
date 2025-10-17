@@ -12,7 +12,7 @@ public class PlayerWeapons : MonoBehaviour
 
     [SerializeField] Transform weaponPunch;
     [SerializeField] List<Weapon> starterWeapons;
-    List<Weapon> weapons;
+    [SerializeField] List<Weapon> weapons;
     public List<Weapon> Weapons => weapons;
     float tickTime;
 
@@ -58,12 +58,12 @@ public class PlayerWeapons : MonoBehaviour
         }
     }
 
-    public void Upgrade(WeaponUpgrade upgrade)
+    public void Upgrade(WeaponUpgradeWrapper upgrade)
     {
         var weapon = weapons.Find(w => w.Name == upgrade.Weapon.Name);
         if (weapon == null)
         {
-            if (upgrade.Type == WeaponUpgradeTypes.Unlock)
+            if (upgrade.Type == WUType.Unlock)
             {
                 weapons.Add(Instantiate(upgrade.Weapon));
             }
@@ -74,22 +74,22 @@ public class PlayerWeapons : MonoBehaviour
             var upgradeAmount = upgrade.IsPercent ? upgrade.Amount / 100f : upgrade.Amount;
             switch (upgrade.Type)
             {
-                case WeaponUpgradeTypes.Damage:
+                case WUType.Damage:
                     weapon.DamageBoost += upgradeAmount;
                     break;
-                case WeaponUpgradeTypes.Range:
+                case WUType.Range:
                     weapon.RangeBoost += upgradeAmount;
                     break;
-                case WeaponUpgradeTypes.FireRate:
+                case WUType.FireRate:
                     weapon.FireRateBoost += upgradeAmount;
                     break;
-                case WeaponUpgradeTypes.Speed:
+                case WUType.Speed:
                     weapon.SpeedBoost += upgradeAmount;
                     break;
-                case WeaponUpgradeTypes.ProjectileCount:
+                case WUType.ProjectileCount:
                     weapon.ProjectileCountBoost += upgradeAmount;
                     break;
-                case WeaponUpgradeTypes.Pierce:
+                case WUType.Pierce:
                     weapon.PierceBoost += upgradeAmount;
                     break;
             }

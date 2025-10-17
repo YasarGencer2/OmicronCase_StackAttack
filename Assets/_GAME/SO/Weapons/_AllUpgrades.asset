@@ -1,0 +1,99 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96e16fda273d44cb6baa98f0e7f87fa5, type: 3}
+  m_Name: _AllUpgrades
+  m_EditorClassIdentifier: 
+  Data:
+  - Type: 1
+    MinMaxCommon:
+      x: 1
+      y: 1
+    MinMaxRare:
+      x: 2
+      y: 2
+    MinMaxEpic:
+      x: 2
+      y: 3
+    MinMaxLegendary:
+      x: 4
+      y: 6
+    IsPercent: 0
+  - Type: 2
+    MinMaxCommon:
+      x: 10
+      y: 15
+    MinMaxRare:
+      x: 15
+      y: 25
+    MinMaxEpic:
+      x: 25
+      y: 30
+    MinMaxLegendary:
+      x: 30
+      y: 40
+    IsPercent: 1
+  - Type: 3
+    MinMaxCommon:
+      x: 30
+      y: 50
+    MinMaxRare:
+      x: 40
+      y: 60
+    MinMaxEpic:
+      x: 50
+      y: 70
+    MinMaxLegendary:
+      x: 70
+      y: 150
+    IsPercent: 1
+  - Type: 4
+    MinMaxCommon:
+      x: 30
+      y: 50
+    MinMaxRare:
+      x: 40
+      y: 60
+    MinMaxEpic:
+      x: 50
+      y: 70
+    MinMaxLegendary:
+      x: 70
+      y: 150
+    IsPercent: 1
+  - Type: 5
+    MinMaxCommon:
+      x: 1
+      y: 1
+    MinMaxRare:
+      x: 1
+      y: 1
+    MinMaxEpic:
+      x: 1
+      y: 3
+    MinMaxLegendary:
+      x: 1
+      y: 4
+    IsPercent: 0
+  - Type: 6
+    MinMaxCommon:
+      x: 1
+      y: 1
+    MinMaxRare:
+      x: 2
+      y: 2
+    MinMaxEpic:
+      x: 3
+      y: 3
+    MinMaxLegendary:
+      x: 4
+      y: 4
+    IsPercent: 0

@@ -16,7 +16,7 @@ MonoBehaviour:
   Icon: {fileID: -1556008767, guid: b7fc302aa4ce44068ab9a5a3b420ecf5, type: 3}
   prefab: {fileID: 6036983710768704133, guid: 81689f342b43843d684ec84cca51f488, type: 3}
   damage: 1
-  range: 100
+  range: 8
   fireRate: 2
   speed: 10
   projectileCount: 1

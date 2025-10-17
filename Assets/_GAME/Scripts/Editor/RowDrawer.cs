@@ -6,6 +6,7 @@ public class RowDrawer : PropertyDrawer
 {
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
+        if (property == null) return;
         var helpers = property.FindPropertyRelative("rowHelpers");
         var moving = property.FindPropertyRelative("MovingRow");
         var pos1 = property.FindPropertyRelative("Pos1");
