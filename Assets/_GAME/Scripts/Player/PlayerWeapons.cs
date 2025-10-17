@@ -35,6 +35,7 @@ public class PlayerWeapons : MonoBehaviour
         foreach (var item in weapons)
         {
             item.Reset();
+            item.InitializePool();
         }
     }
     void Update()
@@ -65,7 +66,10 @@ public class PlayerWeapons : MonoBehaviour
         {
             if (upgrade.Type == WUType.Unlock)
             {
-                weapons.Add(Instantiate(upgrade.Weapon));
+                var wp = Instantiate(upgrade.Weapon);
+                wp.Reset();
+                wp.InitializePool();
+                weapons.Add(wp);
             }
             return;
         }

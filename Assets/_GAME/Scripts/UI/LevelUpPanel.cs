@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
 using DG.Tweening;
 using UnityEngine;
 
@@ -14,12 +13,14 @@ public class LevelUpPanel : MonoBehaviour
     {
         GameEventSystem.Instance.OnLevelUp += Show;
         GameEventSystem.Instance.OnLevelLoadStarted += LevelLoadStarted;
+        GameEventSystem.Instance.OnCardSelected += OnCardSelected;
     }
 
     void OnDisable()
     {
         GameEventSystem.Instance.OnLevelUp -= Show;
         GameEventSystem.Instance.OnLevelLoadStarted -= LevelLoadStarted;
+        GameEventSystem.Instance.OnCardSelected -= OnCardSelected;
     }
     void LevelLoadStarted()
     {
@@ -41,9 +42,9 @@ public class LevelUpPanel : MonoBehaviour
     }
     void Hide(float delay)
     {
-        OPEN = false;
         canvasGroup.DOFade(0, 0.25f).SetDelay(delay).OnComplete(() =>
         {
+            OPEN = false;
             canvasGroup.interactable = false;
             canvasGroup.blocksRaycasts = false;
         });
@@ -59,7 +60,7 @@ public class LevelUpPanel : MonoBehaviour
     {
         for (int i = 0; i < cards.Count; i++)
         {
-            cards[i].SetUpgrade(upgrades[i], OnCardSelected);
+            cards[i].SetUpgrade(upgrades[i]);
         }
     }
     void OnCardSelected(UpgradeCard card)
@@ -69,6 +70,6 @@ public class LevelUpPanel : MonoBehaviour
             if (card != item)
                 item.Hide();
         }
-        Hide(.5f);
+        Hide(.25f);
     }
 }

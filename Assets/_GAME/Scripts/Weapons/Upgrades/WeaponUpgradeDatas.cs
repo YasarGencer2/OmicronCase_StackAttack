@@ -8,12 +8,13 @@ using UnityEngine;
 public class WeaponUpgradeDatas : ScriptableObject
 {
     public WeaponUpgradeData[] Data;
+    public AvailableUpgradesForWeapon[] AvailableUpgrades;
 
     public WeaponUpgradeWrapper GetRandomUpgrade(Weapon weapon)
     {
-        var randomIndex = UnityEngine.Random.Range(0, Data.Length);
-        var upgradeData = Data[randomIndex];
-        var wrapper = DataToWrapper(upgradeData, weapon);
+        var type = GetType(weapon);
+        var data = Array.Find(Data, d => d.Type == type);
+        var wrapper = DataToWrapper(data, weapon);
         return wrapper;
     }
     WeaponUpgradeWrapper DataToWrapper(WeaponUpgradeData data, Weapon weapon)
@@ -23,21 +24,7 @@ public class WeaponUpgradeDatas : ScriptableObject
         wrapper.Type = data.Type;
         wrapper.Rarity = GetRarity();
         wrapper.IsPercent = data.IsPercent;
-        switch (wrapper.Rarity)
-        {
-            case WURarity.Common:
-                wrapper.Amount = UnityEngine.Random.Range(data.MinMaxCommon.x, data.MinMaxCommon.y);
-                break;
-            case WURarity.Rare:
-                wrapper.Amount = UnityEngine.Random.Range(data.MinMaxRare.x, data.MinMaxRare.y);
-                break;
-            case WURarity.Epic:
-                wrapper.Amount = UnityEngine.Random.Range(data.MinMaxEpic.x, data.MinMaxEpic.y);
-                break;
-            case WURarity.Legendary:
-                wrapper.Amount = UnityEngine.Random.Range(data.MinMaxLegendary.x, data.MinMaxLegendary.y);
-                break;
-        }
+        wrapper.Amount = GetAmount(data, wrapper.Rarity);
         return wrapper;
     }
     WURarity GetRarity()
@@ -52,7 +39,33 @@ public class WeaponUpgradeDatas : ScriptableObject
         else
             return WURarity.Legendary;
     }
-
+    WUType GetType(Weapon weapon)
+    {
+        foreach (var available in AvailableUpgrades)
+        {
+            if (available.Weapon.Name == weapon.Name)
+            {
+                var randomIndex = UnityEngine.Random.Range(0, available.Upgrades.Length);
+                return available.Upgrades[randomIndex];
+            }
+        }
+        return WUType.Damage;
+    }
+    float GetAmount(WeaponUpgradeData data, WURarity rarity)
+    {
+        switch (rarity)
+        {
+            case WURarity.Common:
+                return UnityEngine.Random.Range(data.MinMaxCommon.x, data.MinMaxCommon.y);
+            case WURarity.Rare:
+                return UnityEngine.Random.Range(data.MinMaxRare.x, data.MinMaxRare.y);
+            case WURarity.Epic:
+                return UnityEngine.Random.Range(data.MinMaxEpic.x, data.MinMaxEpic.y);
+            case WURarity.Legendary:
+                return UnityEngine.Random.Range(data.MinMaxLegendary.x, data.MinMaxLegendary.y);
+        }
+        return 0f;
+    }
 }
 
 [System.Serializable]
@@ -70,6 +83,12 @@ public class WeaponUpgradeWrapper
     public WURarity Rarity;
     public float Amount;
     public bool IsPercent;
+}
+[System.Serializable]
+public class AvailableUpgradesForWeapon
+{
+    public Weapon Weapon;
+    public WUType[] Upgrades;
 }
 public enum WUType
 {

@@ -34,4 +34,6 @@ public class GameEventSystem : MonoBehaviour
     public UnityAction OnFirstInput;
     public void Trigger_FirstInput() => OnFirstInput?.Invoke();
 
+    public UnityAction<UpgradeCard> OnCardSelected;
+    public void Trigger_OnCardSelected(UpgradeCard upgradeCard) => OnCardSelected?.Invoke(upgradeCard);
 }

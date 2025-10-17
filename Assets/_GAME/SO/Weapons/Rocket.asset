@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9080b343ea0e84c3da4e40b380d5457d, type: 3}
-  m_Name: Ball FAST
+  m_Name: Rocket
   m_EditorClassIdentifier: 
-  Name: BALL FAST
+  Name: Rocket
   Icon: {fileID: -1754994274, guid: b7fc302aa4ce44068ab9a5a3b420ecf5, type: 3}
-  prefab: {fileID: 6036983710768704133, guid: 81689f342b43843d684ec84cca51f488, type: 3}
+  prefab: {fileID: 7418188178447760204, guid: 4bf38b1779900498da4dad2577b7c7b8, type: 3}
   damage: 1
-  range: 5
-  fireRate: 10
-  speed: 5
+  range: 10
+  fireRate: 0.5
+  speed: 15
   projectileCount: 1
-  pierce: 1
+  pierce: 1000
   DamageBoost: 1
   RangeBoost: 1
   FireRateBoost: 1

@@ -97,3 +97,10 @@ MonoBehaviour:
       x: 4
       y: 4
     IsPercent: 0
+  AvailableUpgrades:
+  - Weapon: {fileID: 11400000, guid: ef93232e14c3349638968a396e0b951f, type: 2}
+    Upgrades: 010000000200000003000000040000000500000006000000
+  - Weapon: {fileID: 11400000, guid: 231ea5e265de44579928acd0f3da3071, type: 2}
+    Upgrades: 0100000002000000030000000400000005000000
+  - Weapon: {fileID: 11400000, guid: 5e675fa334bcd4caabf7e8a506a0003e, type: 2}
+    Upgrades: 0100000002000000030000000400000005000000

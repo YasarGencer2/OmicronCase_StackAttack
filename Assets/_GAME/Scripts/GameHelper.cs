@@ -15,6 +15,7 @@ public class GameHelper : MonoBehaviour
 
     void Awake()
     {
+        Application.targetFrameRate = 120;
         Instance = this;
     }
     void OnEnable()

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Weapon", menuName = "Weapon")]
@@ -23,15 +24,54 @@ public class Weapon : ScriptableObject
     public float ProjectileCountBoost = 0;
     public float PierceBoost = 0;
 
-    public float Damage => damage * DamageBoost;
+    public int Damage
+    {
+        get
+        {
+            var floor = Mathf.FloorToInt(damage * DamageBoost);
+            var ceil = Mathf.CeilToInt(damage * DamageBoost);
+            var selectRandom = Random.value < .5f ? ceil : floor;
+            return selectRandom;
+        }
+    }
     public float Range => range * RangeBoost;
     public float FireRate => fireRate * FireRateBoost;
     public float Speed => speed * SpeedBoost;
-    public float ProjectileCount => projectileCount + ProjectileCountBoost;
-    public float Pierce => pierce + PierceBoost;
+    public int ProjectileCount => Mathf.CeilToInt(projectileCount + ProjectileCountBoost);
+    public int Pierce => Mathf.CeilToInt(pierce + PierceBoost);
 
 
     float lastFireTime = 0f;
+
+    Queue<Projectile> pool = new Queue<Projectile>();
+    int poolSize = 7;
+
+    public void InitializePool()
+    {
+        for (int i = 0; i < poolSize; i++)
+        {
+            var proj = Instantiate(prefab);
+            proj.gameObject.SetActive(false);
+            pool.Enqueue(proj);
+        }
+    }
+    Projectile GetFromPool()
+    {
+        if (pool.Count > 0)
+        {
+            var proj = pool.Dequeue();
+            proj.gameObject.SetActive(true);
+            return proj;
+        }
+        var newProj = Instantiate(prefab);
+        return newProj;
+    }
+
+    void ReturnToPool(Projectile proj)
+    {
+        proj.gameObject.SetActive(false);
+        pool.Enqueue(proj);
+    }
 
     public void Reset()
     {
@@ -39,7 +79,7 @@ public class Weapon : ScriptableObject
     }
     public bool TryFire(float tickTime)
     {
-        if (tickTime - lastFireTime >= 1f / fireRate)
+        if (tickTime - lastFireTime >= 1f / FireRate)
         {
             lastFireTime = tickTime;
             return true;
@@ -49,7 +89,46 @@ public class Weapon : ScriptableObject
 
     public void Fire()
     {
-        var projectile = Instantiate(prefab);
-        projectile.Initialize(this);
+        CreateProjectiles();
     }
+    void CreateProjectiles()
+    {
+        for (int i = 0; i < ProjectileCount; i++)
+        {
+            Vector3 offset = GetOffset(i);
+            CreateProjectile(offset);
+        }
+    }
+    Projectile CreateProjectile(Vector3 offset)
+    {
+        var projectile = GetFromPool();
+        projectile.Initialize(this, offset);
+        projectile.Die = ReturnToPool;
+        return projectile;
+    }
+
+    Vector3 GetOffset(int index)
+    {
+        int frontRowCapacity = 3;
+        float spacingX = 0.5f;
+        float spacingY = -0.5f;
+
+        if (index < frontRowCapacity)
+        {
+            int innerRowCount = Mathf.Min(ProjectileCount, frontRowCapacity);
+            float x = (index - (innerRowCount - 1) / 2f) * spacingX;
+            return new Vector3(x, 0, 0);
+        }
+
+        int rearIndex = index - frontRowCapacity;
+        int col = rearIndex % 3;
+        int row = rearIndex / 3 + 1;
+
+        int rowCount = Mathf.Min(ProjectileCount - frontRowCapacity - 3 * (row - 1), 3);
+        float xOffset = (col - (rowCount - 1) / 2f) * spacingX;
+        float yOffset = row * spacingY;
+
+        return new Vector3(xOffset, yOffset, 0);
+    }
+
 }

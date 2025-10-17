@@ -1,7 +1,6 @@
 using System;
 using DG.Tweening;
-using TMPro;
-using UnityEditor.Tilemaps;
+using TMPro; 
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,12 +12,13 @@ public class UpgradeCard : MonoBehaviour
     [SerializeField] Button button;
     [SerializeField] Image bg;
     [SerializeField] RarityColors[] rarityColors;
-    public void SetUpgrade(WeaponUpgradeWrapper weaponUpgrade, Action<UpgradeCard> onCardSelected)
+    public void SetUpgrade(WeaponUpgradeWrapper weaponUpgrade)
     {
         SetGeneral(weaponUpgrade);
         SetTexts(weaponUpgrade);
-        SetButton(onCardSelected, weaponUpgrade);
+        SetButton(weaponUpgrade);
         SetColor(weaponUpgrade);
+        print("Set Upgrade Card: " + weaponUpgrade.Type);
     }
     void SetGeneral(WeaponUpgradeWrapper upgrade)
     {
@@ -62,13 +62,13 @@ public class UpgradeCard : MonoBehaviour
                 break;
         }
     }
-    void SetButton(Action<UpgradeCard> onCardSelected, WeaponUpgradeWrapper upgrade)
+    void SetButton(WeaponUpgradeWrapper upgrade)
     {
         button.onClick.RemoveAllListeners();
         button.interactable = true;
         button.onClick.AddListener(() =>
         {
-            onCardSelected?.Invoke(this);
+            GameEventSystem.Instance.Trigger_OnCardSelected(this); 
             GameHelper.Instance.PWeapons.Upgrade(upgrade);
             button.interactable = false;
             transform.DOScale(1.3f, 0.2f);

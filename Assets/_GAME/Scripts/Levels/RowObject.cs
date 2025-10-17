@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
@@ -32,6 +33,25 @@ public class RowObject : MonoBehaviour
             tg.Start();
         }
     }
+    void OnEnable()
+    {
+        GameEventSystem.Instance.OnLevelUp += Pause;
+        GameEventSystem.Instance.OnCardSelected += UnPause;
+    }
+    void OnDisable()
+    {
+        GameEventSystem.Instance.OnLevelUp -= Pause;
+        GameEventSystem.Instance.OnCardSelected -= UnPause;
+    }
+    void Pause()
+    { 
+        moveT?.Pause();
+    }
+    void UnPause(UpgradeCard arg0)
+    {
+        moveT?.Play();
+    }
+
     void Reset()
     {
         foreach (var target in targets)

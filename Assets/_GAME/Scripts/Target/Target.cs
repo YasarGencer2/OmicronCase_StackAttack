@@ -26,7 +26,7 @@ public class Target : MonoBehaviour
     public void SetData(int health, TargetColor color)
     {
         this.health = health;
-        this.color = color; 
+        this.color = color;
     }
     public void Start()
     {
@@ -102,7 +102,7 @@ public class Target : MonoBehaviour
         if (health < 0)
             return;
         healthText.text = health.ToString();
- 
+
         healthText.DOKill();
         healthText.transform.localScale = Vector3.one;
         healthText.transform.DOScale(Vector3.one * 1.2f, 0.1f).SetLoops(2, LoopType.Yoyo);
@@ -111,7 +111,7 @@ public class Target : MonoBehaviour
     {
         health -= damage;
         UpdateTopRenderer();
-        SetHealthText(); 
+        SetHealthText();
         PunchAll();
         TryDie();
     }
@@ -133,12 +133,10 @@ public class Target : MonoBehaviour
     }
     void UpdateTopRenderer()
     {
-        if (health <= lastHealthBeforeStackChange - requiredHealthForStackChange && stack > 1)
+        while (health <= lastHealthBeforeStackChange - requiredHealthForStackChange && stack > 1)
         {
             stack--;
-            if (stack < 0)
-                stack = 0;
-            lastHealthBeforeStackChange = health;
+            lastHealthBeforeStackChange -= requiredHealthForStackChange;
             topRenderer.gameObject.SetActive(false);
             topRenderer = stacks[stack - 1];
         }
@@ -146,6 +144,7 @@ public class Target : MonoBehaviour
         topRenderer.color = Color.white;
         topRenderer.DOColor(unityColor, 0.1f).SetDelay(0.05f);
     }
+
     void PunchAll()
     {
         if (transform == null)

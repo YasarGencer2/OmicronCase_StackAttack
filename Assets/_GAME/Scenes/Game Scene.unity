@@ -2227,7 +2227,7 @@ MonoBehaviour:
   currentLevel: 0
   xpPoints: 0
   requiredXP: 4
-  xpIncrementPercentage: 25
+  xpIncrementPercentage: 15
 --- !u!114 &918361860
 MonoBehaviour:
   m_ObjectHideFlags: 0
