@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -8,17 +9,18 @@ using UnityEngine.UI;
 public class GamePanel : MonoBehaviour
 {
     [SerializeField] CanvasGroup canvasGroup;
-    [SerializeField] Slider xp;
+    [SerializeField] Slider xp, distance;
     [SerializeField] List<GameObject> hearts;
     [SerializeField] TextMeshProUGUI levelText;
     [SerializeField] Slider bossSlider;
     [SerializeField] TextMeshProUGUI bossIncomingAlert;
 
-    CanvasGroup xpCG, bossCG;
+    CanvasGroup xpCG, distanceCG, bossCG;
 
     void OnEnable()
     {
-        xpCG = xp.GetComponent<CanvasGroup>();;
+        xpCG = xp.GetComponent<CanvasGroup>();
+        distanceCG = distance.GetComponent<CanvasGroup>();
         bossCG = bossSlider.GetComponent<CanvasGroup>();
 
         GameEventSystem.Instance.OnXPChange += ChangeXPSlider;
@@ -50,6 +52,7 @@ public class GamePanel : MonoBehaviour
     {
         canvasGroup.DOFade(0, 0.2f);
         xpCG.DOFade(1, 0f);
+        distanceCG.DOFade(1, 0f);
         bossCG.DOFade(0, 0);
     }
     void FirstInput()
@@ -59,6 +62,7 @@ public class GamePanel : MonoBehaviour
     void BossSpawned()
     {
         xpCG.DOFade(0, 0.2f);
+        distanceCG.DOFade(0, 0.2f);
         bossCG.DOFade(1, 0.2f);
 
         bossSlider.maxValue = LevelManager.Instance.Level.Boss.MaxHealth;
@@ -79,10 +83,12 @@ public class GamePanel : MonoBehaviour
     {
         xp.maxValue = 100;
         xp.value = 0;
+
+        distance.maxValue = LevelManager.Instance.LevelLength;
+        distance.value = 0;
     }
     void SetHearts()
     {
-
         foreach (var heart in hearts)
         {
             heart.SetActive(true);
@@ -109,5 +115,13 @@ public class GamePanel : MonoBehaviour
         bossIncomingAlert.alpha = 1;
         bossIncomingAlert.DOFade(.7f, .2f).SetLoops(3, LoopType.Yoyo);
         bossIncomingAlert.DOFade(0, 1f).SetDelay(1f);
+    }
+
+    void Update()
+    {
+        if (GameHelper.Instance.IsGamePlaying() == false)
+            return;
+        if (distanceCG.alpha < 1) return;
+        distance.value = GameHelper.Instance.PTransform.position.y;
     }
 }

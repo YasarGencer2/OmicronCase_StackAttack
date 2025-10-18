@@ -27,6 +27,15 @@ public class LevelManager : MonoBehaviour
     public Level Level => activeLevel;
     GameObject activeCustom;
 
+    public float LevelLength
+    {
+        get
+        {
+            if (activeLevel == null) return 0f;
+            return activeLevel.Rows.Length * rowSpacing + 14;
+        }
+    }
+
     void Awake()
     {
         Instance = this;
