@@ -11,6 +11,8 @@ public class GamePanel : MonoBehaviour
     [SerializeField] Slider xp;
     [SerializeField] List<GameObject> hearts;
     [SerializeField] TextMeshProUGUI levelText;
+    [SerializeField] Slider bossSlider;
+    [SerializeField] TextMeshProUGUI bossIncomingAlert;
 
     void OnEnable()
     {
@@ -19,6 +21,8 @@ public class GamePanel : MonoBehaviour
         GameEventSystem.Instance.OnLevelLoaded += OnLevelLoaded;
         GameEventSystem.Instance.OnLevelLoadStarted += LevelLoadStarted;
         GameEventSystem.Instance.OnFirstInput += FirstInput;
+        GameEventSystem.Instance.OnBossSpawned += BossSpawned;
+        GameEventSystem.Instance.OnBossDamaged += ChangeBossSlider;
     }
     void OnDisable()
     {
@@ -27,20 +31,38 @@ public class GamePanel : MonoBehaviour
         GameEventSystem.Instance.OnLevelLoaded -= OnLevelLoaded;
         GameEventSystem.Instance.OnLevelLoadStarted -= LevelLoadStarted;
         GameEventSystem.Instance.OnFirstInput -= FirstInput;
+        GameEventSystem.Instance.OnBossSpawned -= BossSpawned;
+        GameEventSystem.Instance.OnBossDamaged -= ChangeBossSlider;
     }
     void OnLevelLoaded()
     {
         SetSlider();
         SetHearts();
         SetLevelText();
+        bossIncomingAlert.DOFade(0, 0);
     }
     void LevelLoadStarted()
     {
         canvasGroup.DOFade(0, 0.2f);
+        bossSlider.GetComponent<CanvasGroup>().DOFade(0, 0);
     }
     void FirstInput()
     {
         canvasGroup.DOFade(1, 0.2f);
+    }
+    void BossSpawned()
+    {
+        xp.GetComponent<CanvasGroup>().DOFade(0, 0.2f);
+        bossSlider.GetComponent<CanvasGroup>().DOFade(1, 0.2f);
+
+        bossSlider.maxValue = LevelManager.Instance.Level.Boss.MaxHealth;
+        bossSlider.value = bossSlider.maxValue;
+
+        BossIncomingAlert();
+    }
+    void ChangeBossSlider(int arg0)
+    {
+        bossSlider.value = arg0;
     }
     private void ChangeXPSlider(int arg0, int arg1)
     {
@@ -74,5 +96,12 @@ public class GamePanel : MonoBehaviour
     void SetLevelText()
     {
         levelText.text = $"LEVEL {LevelManager.VisualLevel}";
+    }
+    void BossIncomingAlert()
+    {
+        bossIncomingAlert.DOKill();
+        bossIncomingAlert.alpha = 1;
+        bossIncomingAlert.DOFade(.7f, .2f).SetLoops(3, LoopType.Yoyo);
+        bossIncomingAlert.DOFade(0, 1f).SetDelay(1f);
     }
 }

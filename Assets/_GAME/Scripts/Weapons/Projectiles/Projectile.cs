@@ -30,7 +30,6 @@ public class Projectile : MonoBehaviour
     }
     void OnDie(Projectile proj)
     {
-        print("Projectile Died");
         if (autoDieCoroutine != null)
             GameHelper.Instance.StopCoroutine(autoDieCoroutine);
     }
@@ -52,10 +51,12 @@ public class Projectile : MonoBehaviour
     void OnEnable()
     {
         GameEventSystem.Instance.OnLevelLoadStarted += OnLevelLoadStarted;
+        GameEventSystem.Instance.OnBossSpawned += OnLevelLoadStarted;
     }
     void OnDisable()
     {
         GameEventSystem.Instance.OnLevelLoadStarted -= OnLevelLoadStarted;
+        GameEventSystem.Instance.OnBossSpawned -= OnLevelLoadStarted;
     }
     private void OnLevelLoadStarted()
     {

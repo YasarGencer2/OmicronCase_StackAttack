@@ -19,10 +19,12 @@ public class PlayerMovement : MonoBehaviour
     void OnEnable()
     {
         GameEventSystem.Instance.OnLevelLoadStarted += OnLevelLoadStarted;
+        GameEventSystem.Instance.OnBossSpawned += BossSpawned;
     }
     void OnDisable()
     {
         GameEventSystem.Instance.OnLevelLoadStarted -= OnLevelLoadStarted;
+        GameEventSystem.Instance.OnBossSpawned -= BossSpawned;
     }
     private void OnLevelLoadStarted()
     {
@@ -99,5 +101,10 @@ public class PlayerMovement : MonoBehaviour
     {
         currentForwardSpeed = forwwardSpeed * 10;
         DOTween.To(() => currentForwardSpeed, x => currentForwardSpeed = x, forwwardSpeed, 1f).SetEase(Ease.OutSine);
+    }
+    void BossSpawned()
+    {
+        currentForwardSpeed = forwwardSpeed * 10;
+        DOTween.To(() => currentForwardSpeed, x => currentForwardSpeed = x, 0, 2f).SetEase(Ease.OutSine);
     }
 }

@@ -28,7 +28,7 @@ public class GameEventSystem : MonoBehaviour
     public UnityAction OnLevelLoadStarted;
     public void Trigger_LevelCompleted() => OnLevelCompleted?.Invoke();
     public void Trigger_LevelFailed() => OnLevelFailed?.Invoke();
-    public void Trigger_LevelLoaded() => OnLevelLoaded?.Invoke( );
+    public void Trigger_LevelLoaded() => OnLevelLoaded?.Invoke();
     public void Trigger_LevelLoadStarted() => OnLevelLoadStarted?.Invoke();
 
     public UnityAction OnFirstInput;
@@ -36,4 +36,12 @@ public class GameEventSystem : MonoBehaviour
 
     public UnityAction<UpgradeCard> OnCardSelected;
     public void Trigger_OnCardSelected(UpgradeCard upgradeCard) => OnCardSelected?.Invoke(upgradeCard);
+
+    public UnityAction OnRowDied;
+    public void Trigger_RowDied() => OnRowDied?.Invoke();
+
+    public UnityAction OnBossSpawned;
+    public UnityAction<int> OnBossDamaged;
+    public void Trigger_BossSpawned() => OnBossSpawned?.Invoke();
+    public void Trigger_BossDamaged(int currentHealth) => OnBossDamaged?.Invoke(currentHealth);
 }

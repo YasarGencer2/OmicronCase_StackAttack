@@ -6,8 +6,10 @@ using UnityEngine;
 
 public class Target : MonoBehaviour
 {
-    [SerializeField] int health;
+    public bool IsBoss { get; set; }
+    public int health;
     int stack;
+    int forcedStack = -1;
     [SerializeField] TargetColor color;
     Color unityColor;
 
@@ -23,10 +25,12 @@ public class Target : MonoBehaviour
     int requiredHealthForStackChange;
     int lastHealthBeforeStackChange;
 
-    public void SetData(int health, TargetColor color)
+
+    public void SetData(int health, TargetColor color, int forcedStack = -1)
     {
         this.health = health;
         this.color = color;
+        this.forcedStack = forcedStack;
     }
     public void Start()
     {
@@ -47,11 +51,18 @@ public class Target : MonoBehaviour
     }
     void SetStackAmount()
     {
+        if (forcedStack > 0)
+        {
+            stack = forcedStack;
+            return;
+        }
         stack = health;
         if (stack < 1)
             stack = 1;
         if (health > 10)
             stack /= 2;
+        if (health > 15)
+            stack = 15;
         // if (health > 20)
         //     stack /= 2;
     }
@@ -115,6 +126,8 @@ public class Target : MonoBehaviour
         SetHealthText();
         PunchAll();
         TryDie();
+        if(IsBoss)
+            GameEventSystem.Instance.Trigger_BossDamaged(health);
     }
     void TryDie()
     {
@@ -131,6 +144,9 @@ public class Target : MonoBehaviour
         var dieParticle = ParticleSystem.Instance.Play(ParticleType.TargetKilled, transform.position);
         var mainModule = dieParticle.main;
         mainModule.startColor = unityColor;
+
+        if (IsBoss)
+            GameEventSystem.Instance.Trigger_LevelCompleted();
     }
     void UpdateTopRenderer()
     {

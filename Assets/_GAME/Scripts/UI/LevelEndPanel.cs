@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using DG.Tweening;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +14,7 @@ public class LevelEndPanel : MonoBehaviour
     [SerializeField] Transform panel;
     [SerializeField] List<Button> close;
     [SerializeField] Transform winText, loseText;
+    [SerializeField] TextMeshProUGUI levelText;
 
     void Awake()
     {
@@ -56,6 +58,9 @@ public class LevelEndPanel : MonoBehaviour
 
         panel.localScale = Vector3.zero;
         panel.DOScale(Vector3.one, 0.25f).SetEase(Ease.OutBack);
+
+        var level = LevelManager.VisualLevel;
+        levelText.text = "LEVEL " + level;
     }
     void Hide(float time = 0.25f)
     {

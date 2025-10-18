@@ -23,10 +23,12 @@ public class PlayerWeapons : MonoBehaviour
     void OnEnable()
     {
         GameEventSystem.Instance.OnLevelLoadStarted += LevelLoadStarted;
+        GameEventSystem.Instance.OnBossSpawned += BossSpawned;
     }
     void OnDisable()
     {
         GameEventSystem.Instance.OnLevelLoadStarted -= LevelLoadStarted;
+        GameEventSystem.Instance.OnBossSpawned -= BossSpawned;
     }
     void LevelLoadStarted()
     {
@@ -106,6 +108,10 @@ public class PlayerWeapons : MonoBehaviour
         weaponPunch.DOKill();
         weaponPunch.localScale = Vector3.one;
         weaponPunch.DOPunchScale(Vector3.one * -0.2f, 0.2f, 1, 0);
+    }
+    void BossSpawned()
+    {
+        tickTime -= 2f;
     }
 }
 

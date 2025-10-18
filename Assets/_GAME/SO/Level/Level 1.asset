@@ -10,8 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 62b5ac671e6434f2783ba54b5998e3da, type: 3}
-  m_Name: Level1
+  m_Name: Level 1
   m_EditorClassIdentifier: 
+  Boss: {fileID: 11400000, guid: a0643f19d62ea4e5f9d06091ae52799f, type: 2}
   Custom: {fileID: 7713787335006018293, guid: 497efdadb1ad444a395322afb85e3060, type: 3}
   Rows:
   - rowHelpers:

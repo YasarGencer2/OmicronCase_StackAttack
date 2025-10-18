@@ -23,3 +23,5 @@ MonoBehaviour:
     targetColor: 4
   - color: {r: 0.6392157, g: 0.99607843, b: 0.10980392, a: 1}
     targetColor: 5
+  - color: {r: 0.36078432, g: 1, b: 0.5411765, a: 1}
+    targetColor: 101

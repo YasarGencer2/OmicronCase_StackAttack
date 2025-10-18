@@ -5,6 +5,7 @@ public class TargetsRotater : MonoBehaviour
     bool rotating = false;
 
     [SerializeField] float rotateSpeed = 50f;
+    public float Speed { get { return rotateSpeed; } set { rotateSpeed = value; } }
     [SerializeField] float activateDistance = 15f;
 
     void Start()
@@ -13,7 +14,7 @@ public class TargetsRotater : MonoBehaviour
     }
     void Update()
     {
-        if(GameHelper.Instance.IsGamePlaying() == false)
+        if (GameHelper.Instance.IsGamePlaying() == false)
             return;
         if (rotating == false)
             CheckForStartRotating();

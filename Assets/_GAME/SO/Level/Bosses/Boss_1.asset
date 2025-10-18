@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da0e23d75fe2a407daf835e60c53916c, type: 3}
+  m_Name: Boss_1
+  m_EditorClassIdentifier: 
+  Name: Boss
+  Prefab: {fileID: 5407094275739212351, guid: 700073c69470e46a4ae1e2fbd7afd531, type: 3}
+  MaxHealth: 100
+  Color: 101
+  ShieldingType: 10
+  ShieldColor: 1
+  ShieldSpeed: 15
+  ShieldingAmount: 5
+  ShiledRandomized: 1
+  shiledingStackRange:
+    x: 15
+    y: 25
+  FireRate: 20
+  rowSpeedRange:
+    x: 1
+    y: 3
+  rowStackRange:
+    x: 30
+    y: 45
+  rowAmountRange:
+    x: 1
+    y: 1

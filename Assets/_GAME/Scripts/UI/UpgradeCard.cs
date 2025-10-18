@@ -18,7 +18,6 @@ public class UpgradeCard : MonoBehaviour
         SetTexts(weaponUpgrade);
         SetButton(weaponUpgrade);
         SetColor(weaponUpgrade);
-        print("Set Upgrade Card: " + weaponUpgrade.Type);
     }
     void SetGeneral(WeaponUpgradeWrapper upgrade)
     {

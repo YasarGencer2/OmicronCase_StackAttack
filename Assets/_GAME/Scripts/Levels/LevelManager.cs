@@ -24,6 +24,7 @@ public class LevelManager : MonoBehaviour
     int lastCreatedIndex = 0;
 
     Level activeLevel;
+    public Level Level => activeLevel;
     GameObject activeCustom;
 
     void Awake()
@@ -39,11 +40,12 @@ public class LevelManager : MonoBehaviour
     {
         if (activeCustom != null)
             Destroy(activeCustom);
+        Select(index);
         GameEventSystem.Instance.Trigger_LevelLoadStarted();
-        Load(index);
+        Load();
         GameEventSystem.Instance.Trigger_LevelLoaded();
     }
-    void Load(int index)
+    void Select(int index)
     {
         if (index < nonLoopingLevels.Levels.Count)
             activeLevel = nonLoopingLevels.Levels[index];
@@ -52,12 +54,15 @@ public class LevelManager : MonoBehaviour
             int loopedIndex = (index - nonLoopingLevels.Levels.Count) % loopingLevels.Levels.Count;
             activeLevel = loopingLevels.Levels[loopedIndex];
         }
+    }
+    void Load()
+    {
         CreateRows();
-        activeCustom = Instantiate(activeLevel.Custom, levelParent);
-        Debug.Log($"active custom" + activeCustom.name, activeCustom);
+        if (activeLevel.Custom != null)
+            activeCustom = Instantiate(activeLevel.Custom, levelParent);
     }
     void CreateRows()
-    { 
+    {
         for (int i = 0; i < Mathf.Min(poolSize, activeLevel.Rows.Length); i++)
         {
             var row = activeLevel.Rows[i];
@@ -77,6 +82,7 @@ public class LevelManager : MonoBehaviour
     {
         rowObject.Deactivate();
         pool.Enqueue(rowObject);
+        GameEventSystem.Instance.Trigger_RowDied();
         TryCreateRow();
     }
     public RowObject GetFromPool()

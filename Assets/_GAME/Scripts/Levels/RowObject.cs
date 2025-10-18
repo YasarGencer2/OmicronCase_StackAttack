@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using DG.Tweening;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class RowObject : MonoBehaviour
@@ -11,15 +10,15 @@ public class RowObject : MonoBehaviour
 
     Tween moveT;
 
-    public Action<RowObject> Die { get; internal set; }
+    public Action<RowObject> Die { get; set; }
 
     public void Deactivate()
     {
         gameObject.SetActive(false);
         Reset();
     }
-    public void Set(Row row, Vector3 origin)
-    { 
+    public void Set(Row row, Vector3 origin, bool localOrigin = true)
+    {
         if (row == null)
             return;
         if (row.rowHelpers == null)
@@ -27,7 +26,11 @@ public class RowObject : MonoBehaviour
         if (row.rowHelpers.Length != targets.Count)
             return;
         rowData = row;
-        transform.localPosition = origin;
+        transform.DOKill();
+        if (localOrigin)
+            transform.localPosition = origin;
+        else
+            transform.position = origin;
         Move();
         for (int i = 0; i < targets.Count; i++)
         {
@@ -43,8 +46,8 @@ public class RowObject : MonoBehaviour
     }
     void Update()
     {
-        if(transform.position.y < GameHelper.Instance.DespawnY)
-        { 
+        if (transform.position.y < GameHelper.Instance.DespawnY)
+        {
             Die?.Invoke(this);
         }
     }
