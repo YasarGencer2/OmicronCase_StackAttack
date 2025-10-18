@@ -2841,6 +2841,7 @@ MonoBehaviour:
   forwwardSpeed: 1
   sidewaysSpeedMultiplier: 10
   trail: {fileID: 614262828}
+  sidewaysLimit: 3.5
 --- !u!114 &918361858
 MonoBehaviour:
   m_ObjectHideFlags: 0

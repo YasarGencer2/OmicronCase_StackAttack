@@ -15,6 +15,8 @@ public class PlayerMovement : MonoBehaviour
 
     float currentForwardSpeed;
 
+    [SerializeField] float sidewaysLimit = 2.5f;
+
 
     void OnEnable()
     {
@@ -84,7 +86,8 @@ public class PlayerMovement : MonoBehaviour
     void Drag()
     {
         Vector3 targetPos = GetMouseWorldPos() + offset;
-        transform.position = Vector3.Lerp(transform.position, new Vector3(targetPos.x, transform.position.y, transform.position.z), sidewaysSpeedMultiplier * Time.deltaTime);
+        var clampedX = Mathf.Clamp(targetPos.x, -sidewaysLimit, sidewaysLimit);
+        transform.position = Vector3.Lerp(transform.position, new Vector3(clampedX, transform.position.y, transform.position.z), sidewaysSpeedMultiplier * Time.deltaTime);
     }
 
     Vector3 GetMouseWorldPos()
