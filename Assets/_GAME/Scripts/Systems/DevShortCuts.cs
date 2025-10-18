@@ -1,6 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
-
 public class DevShortCuts : MonoBehaviour
 {
     void Update()
@@ -40,6 +38,14 @@ public class DevShortCuts : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             Time.timeScale = .5f;
+        }
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            GameEventSystem.Instance.Trigger_LevelCompleted();
+        }
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            GameEventSystem.Instance.Trigger_LevelFailed();
         }
     }
 }

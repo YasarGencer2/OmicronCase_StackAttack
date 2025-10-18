@@ -107,6 +107,8 @@ public class LevelManager : MonoBehaviour
     }
     void TryCreateRow()
     {
+        if(GameHelper.Instance.IsGamePlaying() == false)
+            return;
         var level = activeLevel;
         int nextIndex = lastCreatedIndex + 1;
         if (nextIndex >= level.Rows.Length)
