@@ -17,26 +17,26 @@ public class Projectile : MonoBehaviour
 
     public virtual void Initialize(Weapon weapon, Vector3 offset)
     {
-        StopAllCoroutines();
         this.Weapon = weapon;
         pierce = Mathf.FloorToInt(weapon.Pierce);
-        trail.emitting = false;
+        if (trail)
+            trail.emitting = false;
         transform.position = GameHelper.Instance.PTransform.position + offset;
-        trail.Clear();
-        trail.emitting = true;
+        if (trail)
+        {
+            trail.Clear();
+            trail.emitting = true;
+        }
         totalAliveTime = totalAliveTime == 0 ? weapon.Range / weapon.Speed : totalAliveTime;
-        DestroyOnComlpete();
-        Die += OnDie;
+        ClearAutoDie(null);
+        if (autoKill)
+            AutoDie(totalAliveTime);
+        Die += ClearAutoDie;
     }
-    void OnDie(Projectile proj)
+    void ClearAutoDie(Projectile proj)
     {
         if (autoDieCoroutine != null)
             GameHelper.Instance.StopCoroutine(autoDieCoroutine);
-    }
-    void DestroyOnComlpete()
-    {
-        if (autoKill)
-            AutoDie(totalAliveTime);
     }
     protected void AutoDie(float time)
     {

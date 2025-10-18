@@ -26,6 +26,7 @@ public class RowObject : MonoBehaviour
         if (row.rowHelpers.Length != targets.Count)
             return;
         rowData = row;
+        moveT?.Kill();
         transform.DOKill();
         if (localOrigin)
             transform.localPosition = origin;
@@ -78,11 +79,11 @@ public class RowObject : MonoBehaviour
 
     void Reset()
     {
+        moveT?.Kill();
         foreach (var target in targets)
         {
             target.gameObject.SetActive(false);
         }
-        moveT?.Kill();
     }
     void Move()
     {
