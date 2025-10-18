@@ -12,12 +12,18 @@ public class RowDrawer : PropertyDrawer
         var pos1 = property.FindPropertyRelative("Pos1");
         var pos2 = property.FindPropertyRelative("Pos2");
 
+        if (helpers != null && helpers.isArray && Event.current.type == EventType.Layout && helpers.arraySize != 6)
+        {
+            helpers.arraySize = 6;
+            property.serializedObject.ApplyModifiedProperties();
+        }
+
         EditorGUI.LabelField(new Rect(position.x, position.y, position.width, EditorGUIUtility.singleLineHeight), label);
 
         float y = position.y + EditorGUIUtility.singleLineHeight + 4;
         float elementWidth = 100;
 
-        if (helpers.isArray)
+        if (helpers != null && helpers.isArray)
         {
             for (int i = 0; i < helpers.arraySize; i++)
             {

@@ -10,27 +10,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: da0e23d75fe2a407daf835e60c53916c, type: 3}
-  m_Name: Boss_1
+  m_Name: Boss_4
   m_EditorClassIdentifier: 
   Name: Boss
   Prefab: {fileID: 5407094275739212351, guid: 700073c69470e46a4ae1e2fbd7afd531, type: 3}
-  MaxHealth: 250
-  Color: 101
+  MaxHealth: 800
+  Color: 104
   ShieldingType: 10
-  ShieldColor: 1
-  ShieldSpeed: 15
-  ShieldingAmount: 5
+  ShieldColor: 2
+  ShieldSpeed: 30
+  ShieldingAmount: 15
   ShiledRandomized: 1
   shiledingStackRange:
-    x: 15
-    y: 25
-  FireRate: 0.05
+    x: 80
+    y: 120
+  FireRate: 0.3
   rowSpeedRange:
     x: 1
-    y: 1
+    y: 1.2
   rowStackRange:
-    x: 5
-    y: 15
+    x: 40
+    y: 70
   rowAmountRange:
-    x: 0
-    y: 1
+    x: 3
+    y: 5

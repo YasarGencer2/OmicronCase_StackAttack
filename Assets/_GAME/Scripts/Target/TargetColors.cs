@@ -44,7 +44,14 @@ public enum TargetColor
     Pink = 3,
     SkyBlue = 4,
     Lime = 5,
+    Red = 6,
+    Yellow = 7,
+    Green = 8,
 
 
     BossGreen = 101,
+    BossRed = 102,
+    BossYellow = 103,
+    BossPurple = 104,
+    BossBlue = 105,
 }

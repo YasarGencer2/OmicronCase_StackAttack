@@ -5517,7 +5517,7 @@ MonoBehaviour:
   levelParent: {fileID: 4401154}
   rowPrefab: {fileID: 5327877220410450533, guid: 307956706173540999155bf53140cce8, type: 3}
   rowSpacing: 1.3
-  poolSize: 20
+  poolSize: 2000
 --- !u!1 &1765647277
 GameObject:
   m_ObjectHideFlags: 0

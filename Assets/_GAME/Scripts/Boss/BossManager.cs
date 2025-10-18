@@ -17,17 +17,17 @@ public class BossManager : MonoBehaviour
     Boss boss;
     void OnEnable()
     {
-        GameEventSystem.Instance.OnLevelLoadStarted += LevelLoadStarted;
+        GameEventSystem.Instance.OnLevelLoaded += LevelLoaded;
         GameEventSystem.Instance.OnRowDied += RowDied;
         GameEventSystem.Instance.OnLevelCompleted += LevelCompleted;
     }
     void OnDisable()
     {
-        GameEventSystem.Instance.OnLevelLoadStarted -= LevelLoadStarted;
+        GameEventSystem.Instance.OnLevelLoaded -= LevelLoaded;
         GameEventSystem.Instance.OnRowDied -= RowDied;
         GameEventSystem.Instance.OnLevelCompleted -= LevelCompleted;
     }
-    void LevelLoadStarted()
+    void LevelLoaded()
     {
         Kill();
 
@@ -44,7 +44,7 @@ public class BossManager : MonoBehaviour
     }
     void RowDied()
     {
-        rowsKilled++; 
+        rowsKilled++;
         if (rowsKilled >= rowsToKillBeforeBoss)
         {
             SpawnBoss();
@@ -52,6 +52,7 @@ public class BossManager : MonoBehaviour
     }
     void SpawnBoss()
     {
+        if (GameHelper.Instance.IsGamePlaying() == false) return;
         if (createdBoss) return;
         createdBoss = true;
 

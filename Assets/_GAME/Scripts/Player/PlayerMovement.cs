@@ -20,11 +20,13 @@ public class PlayerMovement : MonoBehaviour
     {
         GameEventSystem.Instance.OnLevelLoadStarted += OnLevelLoadStarted;
         GameEventSystem.Instance.OnBossSpawned += BossSpawned;
+        GameEventSystem.Instance.OnLevelUp += StopDrag;
     }
     void OnDisable()
     {
         GameEventSystem.Instance.OnLevelLoadStarted -= OnLevelLoadStarted;
         GameEventSystem.Instance.OnBossSpawned -= BossSpawned;
+        GameEventSystem.Instance.OnLevelUp -= StopDrag;
     }
     private void OnLevelLoadStarted()
     {

@@ -62,7 +62,7 @@ public class Target : MonoBehaviour
         if (health > 10)
             stack /= 2;
         if (health > 15)
-            stack = 15;
+            stack = 10;
         // if (health > 20)
         //     stack /= 2;
     }

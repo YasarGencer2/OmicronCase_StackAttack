@@ -23,5 +23,19 @@ MonoBehaviour:
     targetColor: 4
   - color: {r: 0.6392157, g: 0.99607843, b: 0.10980392, a: 1}
     targetColor: 5
+  - color: {r: 1, g: 0.42867032, b: 0.3607843, a: 1}
+    targetColor: 6
+  - color: {r: 0.968748, g: 1, b: 0.3607843, a: 1}
+    targetColor: 7
+  - color: {r: 0.11792451, g: 1, b: 0.40217954, a: 1}
+    targetColor: 8
   - color: {r: 0.36078432, g: 1, b: 0.5411765, a: 1}
     targetColor: 101
+  - color: {r: 1, g: 0.40365687, b: 0.3607843, a: 1}
+    targetColor: 102
+  - color: {r: 0.94250035, g: 1, b: 0.3607843, a: 1}
+    targetColor: 103
+  - color: {r: 0.69628453, g: 0.3607843, b: 1, a: 1}
+    targetColor: 104
+  - color: {r: 0.3607843, g: 0.4150032, b: 1, a: 1}
+    targetColor: 105

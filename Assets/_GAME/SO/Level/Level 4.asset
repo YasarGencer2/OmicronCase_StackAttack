@@ -1,0 +1,689 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62b5ac671e6434f2783ba54b5998e3da, type: 3}
+  m_Name: Level 4
+  m_EditorClassIdentifier: 
+  Boss: {fileID: 11400000, guid: 4a2e1ef2304d542d9b23760f708703d4, type: 2}
+  Custom: {fileID: 7713787335006018293, guid: 5e0e86ee50fb44afb8d9032df470bcbb, type: 3}
+  Rows:
+  - rowHelpers:
+    - stack: 0
+      color: 0
+    - stack: 10
+      color: 3
+    - stack: 0
+      color: 0
+    - stack: 0
+      color: 0
+    - stack: 10
+      color: 3
+    - stack: 0
+      color: 0
+    MovingRow: 0
+    Pos1: {x: 0, y: 0}
+    Pos2: {x: 0, y: 0}
+  - rowHelpers:
+    - stack: 10
+      color: 3
+    - stack: 10
+      color: 3
+    - stack: 2
+      color: 5
+    - stack: 2
+      color: 5
+    - stack: 10
+      color: 3
+    - stack: 10
+      color: 3
+    MovingRow: 0
+    Pos1: {x: 0, y: 0}
+    Pos2: {x: 0, y: 0}
+  - rowHelpers:
+    - stack: 10
+      color: 3
+    - stack: 10
+      color: 3
+    - stack: 2
+      color: 5
+    - stack: 2
+      color: 5
+    - stack: 10
+      color: 3
+    - stack: 10
+      color: 3
+    MovingRow: 0
+    Pos1: {x: 0, y: 0}
+    Pos2: {x: 0, y: 0}
+  - rowHelpers:
+    - stack: 10
+      color: 3
+    - stack: 10
+      color: 3
+    - stack: 2
+      color: 5
+    - stack: 2
+      color: 5
+    - stack: 10
+      color: 3
+    - stack: 10
+      color: 3
+    MovingRow: 0
+    Pos1: {x: 0, y: 0}
+    Pos2: {x: 0, y: 0}
+  - rowHelpers:
+    - stack: 10
+      color: 3
+    - stack: 10
+      color: 3
+    - stack: 2
+      color: 5
+    - stack: 2
+      color: 5
+    - stack: 10
+      color: 3
+    - stack: 10
+      color: 3
+    MovingRow: 0
+    Pos1: {x: 0, y: 0}
+    Pos2: {x: 0, y: 0}
+  - rowHelpers:
+    - stack: 10
+      color: 3
+    - stack: 0
+      color: 3
+    - stack: 2
+      color: 5
+    - stack: 2
+      color: 5
+    - stack: 0
+      color: 3
+    - stack: 10
+      color: 3
+    MovingRow: 0
+    Pos1: {x: 0, y: 0}
+    Pos2: {x: 0, y: 0}
+  - rowHelpers:
+    - stack: 10
+      color: 3
+    - stack: 10
+      color: 3
+    - stack: 5
+      color: 5
+    - stack: 5
+      color: 5
+    - stack: 10
+      color: 3
+    - stack: 10
+      color: 3
+    MovingRow: 0
+    Pos1: {x: 0, y: 0}
+    Pos2: {x: 0, y: 0}
+  - rowHelpers:
+    - stack: 10
+      color: 3
+    - stack: 10
+      color: 3
+    - stack: 15
+      color: 5
+    - stack: 15
+      color: 5
+    - stack: 10
+      color: 3
+    - stack: 10
+      color: 3
+    MovingRow: 0
+    Pos1: {x: 0, y: 0}
+    Pos2: {x: 0, y: 0}
+  - rowHelpers:
+    - stack: 10
+      color: 3
+    - stack: 10
+      color: 3
+    - stack: 15
+      color: 5
+    - stack: 15
+      color: 5
+    - stack: 10
+      color: 3
+    - stack: 10
+      color: 3
+    MovingRow: 0
+    Pos1: {x: 0, y: 0}
+    Pos2: {x: 0, y: 0}
+  - rowHelpers:
+    - stack: 0
+      color: 3
+    - stack: 10
+      color: 3
+    - stack: 25
+      color: 5
+    - stack: 25
+      color: 5
+    - stack: 10
+      color: 3
+    - stack: 0
+      color: 3
+    MovingRow: 0
+    Pos1: {x: 0, y: 0}
+    Pos2: {x: 0, y: 0}
+  - rowHelpers:
+    - stack: 0
+      color: 3
+    - stack: 0
+      color: 3
+    - stack: 0
+      color: 5
+    - stack: 0
+      color: 5
+    - stack: 0
+      color: 3
+    - stack: 0
+      color: 3
+    MovingRow: 0
+    Pos1: {x: 0, y: 0}
+    Pos2: {x: 0, y: 0}
+  - rowHelpers:
+    - stack: 0
+      color: 6
+    - stack: 15
+      color: 6
+    - stack: 15
+      color: 6
+    - stack: 15
+      color: 6
+    - stack: 0
+      color: 6
+    - stack: 0
+      color: 6
+    MovingRow: 1
+    Pos1: {x: 0.5, y: 0}
+    Pos2: {x: -0.5, y: 0}
+  - rowHelpers:
+    - stack: 0
+      color: 6
+    - stack: 0
+      color: 6
+    - stack: 20
+      color: 6
+    - stack: 20
+      color: 6
+    - stack: 20
+      color: 6
+    - stack: 0
+      color: 6
+    MovingRow: 1
+    Pos1: {x: -0.5, y: 0}
+    Pos2: {x: 0.5, y: 0}
+  - rowHelpers:
+    - stack: 0
+      color: 6
+    - stack: 20
+      color: 6
+    - stack: 20
+      color: 6
+    - stack: 20
+      color: 6
+    - stack: 0
+      color: 6
+    - stack: 0
+      color: 6
+    MovingRow: 1
+    Pos1: {x: 0.5, y: 0}
+    Pos2: {x: -0.5, y: 0}
+  - rowHelpers:
+    - stack: 0
+      color: 6
+    - stack: 0
+      color: 6
+    - stack: 15
+      color: 6
+    - stack: 5
+      color: 6
+    - stack: 15
+      color: 6
+    - stack: 0
+      color: 6
+    MovingRow: 1
+    Pos1: {x: -0.5, y: 0}
+    Pos2: {x: 0.5, y: 0}
+  - rowHelpers:
+    - stack: 0
+      color: 6
+    - stack: 0
+      color: 6
+    - stack: 0
+      color: 6
+    - stack: 0
+      color: 6
+    - stack: 0
+      color: 6
+    - stack: 0
+      color: 6
+    MovingRow: 0
+    Pos1: {x: -1, y: 0}
+    Pos2: {x: 1, y: 0}
+  - rowHelpers:
+    - stack: 100
+      color: 2
+    - stack: 100
+      color: 2
+    - stack: 100
+      color: 2
+    - stack: 25
+      color: 7
+    - stack: 25
+      color: 7
+    - stack: 25
+      color: 7
+    MovingRow: 0
+    Pos1: {x: -1, y: 0}
+    Pos2: {x: 1, y: 0}
+  - rowHelpers:
+    - stack: 5
+      color: 1
+    - stack: 5
+      color: 1
+    - stack: 100
+      color: 2
+    - stack: 25
+      color: 7
+    - stack: 25
+      color: 7
+    - stack: 25
+      color: 7
+    MovingRow: 0
+    Pos1: {x: -1, y: 0}
+    Pos2: {x: 1, y: 0}
+  - rowHelpers:
+    - stack: 5
+      color: 1
+    - stack: 5
+      color: 1
+    - stack: 100
+      color: 2
+    - stack: 25
+      color: 7
+    - stack: 25
+      color: 7
+    - stack: 25
+      color: 7
+    MovingRow: 0
+    Pos1: {x: -1, y: 0}
+    Pos2: {x: 1, y: 0}
+  - rowHelpers:
+    - stack: 5
+      color: 1
+    - stack: 5
+      color: 1
+    - stack: 100
+      color: 2
+    - stack: 25
+      color: 7
+    - stack: 25
+      color: 7
+    - stack: 25
+      color: 7
+    MovingRow: 0
+    Pos1: {x: -1, y: 0}
+    Pos2: {x: 1, y: 0}
+  - rowHelpers:
+    - stack: 5
+      color: 1
+    - stack: 5
+      color: 1
+    - stack: 100
+      color: 2
+    - stack: 25
+      color: 7
+    - stack: 25
+      color: 7
+    - stack: 25
+      color: 7
+    MovingRow: 0
+    Pos1: {x: -1, y: 0}
+    Pos2: {x: 1, y: 0}
+  - rowHelpers:
+    - stack: 100
+      color: 2
+    - stack: 100
+      color: 2
+    - stack: 100
+      color: 2
+    - stack: 25
+      color: 7
+    - stack: 25
+      color: 7
+    - stack: 25
+      color: 7
+    MovingRow: 0
+    Pos1: {x: -1, y: 0}
+    Pos2: {x: 1, y: 0}
+  - rowHelpers:
+    - stack: 0
+      color: 6
+    - stack: 0
+      color: 6
+    - stack: 0
+      color: 6
+    - stack: 0
+      color: 6
+    - stack: 0
+      color: 6
+    - stack: 0
+      color: 6
+    MovingRow: 0
+    Pos1: {x: -1, y: 0}
+    Pos2: {x: 1, y: 0}
+  - rowHelpers:
+    - stack: 0
+      color: 6
+    - stack: 0
+      color: 2
+    - stack: 0
+      color: 2
+    - stack: 0
+      color: 7
+    - stack: 0
+      color: 7
+    - stack: 0
+      color: 6
+    MovingRow: 0
+    Pos1: {x: -1, y: 0}
+    Pos2: {x: 1, y: 0}
+  - rowHelpers:
+    - stack: 500
+      color: 6
+    - stack: 25
+      color: 8
+    - stack: 15
+      color: 7
+    - stack: 15
+      color: 7
+    - stack: 25
+      color: 8
+    - stack: 500
+      color: 6
+    MovingRow: 0
+    Pos1: {x: -1, y: 0}
+    Pos2: {x: 1, y: 0}
+  - rowHelpers:
+    - stack: 500
+      color: 6
+    - stack: 25
+      color: 8
+    - stack: 10
+      color: 7
+    - stack: 10
+      color: 7
+    - stack: 25
+      color: 8
+    - stack: 500
+      color: 6
+    MovingRow: 0
+    Pos1: {x: -1, y: 0}
+    Pos2: {x: 1, y: 0}
+  - rowHelpers:
+    - stack: 500
+      color: 6
+    - stack: 25
+      color: 8
+    - stack: 10
+      color: 7
+    - stack: 10
+      color: 7
+    - stack: 25
+      color: 8
+    - stack: 500
+      color: 6
+    MovingRow: 0
+    Pos1: {x: -1, y: 0}
+    Pos2: {x: 1, y: 0}
+  - rowHelpers:
+    - stack: 500
+      color: 6
+    - stack: 25
+      color: 8
+    - stack: 15
+      color: 7
+    - stack: 15
+      color: 7
+    - stack: 25
+      color: 8
+    - stack: 500
+      color: 6
+    MovingRow: 0
+    Pos1: {x: -1, y: 0}
+    Pos2: {x: 1, y: 0}
+  - rowHelpers:
+    - stack: 500
+      color: 6
+    - stack: 100
+      color: 6
+    - stack: 100
+      color: 6
+    - stack: 100
+      color: 6
+    - stack: 100
+      color: 6
+    - stack: 500
+      color: 6
+    MovingRow: 0
+    Pos1: {x: -1, y: 0}
+    Pos2: {x: 1, y: 0}
+  - rowHelpers:
+    - stack: 0
+      color: 6
+    - stack: 0
+      color: 6
+    - stack: 0
+      color: 6
+    - stack: 0
+      color: 6
+    - stack: 0
+      color: 6
+    - stack: 0
+      color: 6
+    MovingRow: 0
+    Pos1: {x: -1, y: 0}
+    Pos2: {x: 1, y: 0}
+  - rowHelpers:
+    - stack: 0
+      color: 6
+    - stack: 0
+      color: 6
+    - stack: 0
+      color: 6
+    - stack: 0
+      color: 6
+    - stack: 0
+      color: 6
+    - stack: 0
+      color: 6
+    MovingRow: 0
+    Pos1: {x: -1, y: 0}
+    Pos2: {x: 1, y: 0}
+  - rowHelpers:
+    - stack: 0
+      color: 6
+    - stack: 0
+      color: 6
+    - stack: 0
+      color: 6
+    - stack: 0
+      color: 6
+    - stack: 0
+      color: 6
+    - stack: 0
+      color: 6
+    MovingRow: 0
+    Pos1: {x: -1, y: 0}
+    Pos2: {x: 1, y: 0}
+  - rowHelpers:
+    - stack: 0
+      color: 6
+    - stack: 0
+      color: 6
+    - stack: 0
+      color: 6
+    - stack: 0
+      color: 6
+    - stack: 0
+      color: 6
+    - stack: 0
+      color: 6
+    MovingRow: 0
+    Pos1: {x: -1, y: 0}
+    Pos2: {x: 1, y: 0}
+  - rowHelpers:
+    - stack: 0
+      color: 6
+    - stack: 0
+      color: 6
+    - stack: 0
+      color: 6
+    - stack: 0
+      color: 6
+    - stack: 0
+      color: 6
+    - stack: 0
+      color: 6
+    MovingRow: 0
+    Pos1: {x: -1, y: 0}
+    Pos2: {x: 1, y: 0}
+  - rowHelpers:
+    - stack: 0
+      color: 6
+    - stack: 0
+      color: 6
+    - stack: 0
+      color: 6
+    - stack: 0
+      color: 6
+    - stack: 0
+      color: 6
+    - stack: 0
+      color: 6
+    MovingRow: 0
+    Pos1: {x: -1, y: 0}
+    Pos2: {x: 1, y: 0}
+  - rowHelpers:
+    - stack: 0
+      color: 6
+    - stack: 0
+      color: 6
+    - stack: 0
+      color: 6
+    - stack: 0
+      color: 6
+    - stack: 0
+      color: 6
+    - stack: 0
+      color: 6
+    MovingRow: 0
+    Pos1: {x: -1, y: 0}
+    Pos2: {x: 1, y: 0}
+  - rowHelpers:
+    - stack: 0
+      color: 6
+    - stack: 0
+      color: 6
+    - stack: 0
+      color: 6
+    - stack: 0
+      color: 6
+    - stack: 0
+      color: 6
+    - stack: 0
+      color: 6
+    MovingRow: 0
+    Pos1: {x: -1, y: 0}
+    Pos2: {x: 1, y: 0}
+  - rowHelpers:
+    - stack: 0
+      color: 6
+    - stack: 0
+      color: 6
+    - stack: 0
+      color: 6
+    - stack: 0
+      color: 6
+    - stack: 0
+      color: 6
+    - stack: 0
+      color: 6
+    MovingRow: 0
+    Pos1: {x: -1, y: 0}
+    Pos2: {x: 1, y: 0}
+  - rowHelpers:
+    - stack: 0
+      color: 6
+    - stack: 25
+      color: 6
+    - stack: 0
+      color: 6
+    - stack: 25
+      color: 6
+    - stack: 0
+      color: 6
+    - stack: 25
+      color: 6
+    MovingRow: 1
+    Pos1: {x: 1, y: 0}
+    Pos2: {x: -1, y: 0}
+  - rowHelpers:
+    - stack: 25
+      color: 6
+    - stack: 0
+      color: 6
+    - stack: 25
+      color: 6
+    - stack: 0
+      color: 6
+    - stack: 25
+      color: 6
+    - stack: 0
+      color: 6
+    MovingRow: 1
+    Pos1: {x: -1, y: 0}
+    Pos2: {x: 1, y: 0}
+  - rowHelpers:
+    - stack: 0
+      color: 6
+    - stack: 25
+      color: 6
+    - stack: 0
+      color: 6
+    - stack: 25
+      color: 6
+    - stack: 0
+      color: 6
+    - stack: 25
+      color: 6
+    MovingRow: 1
+    Pos1: {x: 1, y: 0}
+    Pos2: {x: -1, y: 0}
+  - rowHelpers:
+    - stack: 25
+      color: 6
+    - stack: 0
+      color: 6
+    - stack: 25
+      color: 6
+    - stack: 0
+      color: 6
+    - stack: 25
+      color: 6
+    - stack: 0
+      color: 6
+    MovingRow: 1
+    Pos1: {x: -1, y: 0}
+    Pos2: {x: 1, y: 0}

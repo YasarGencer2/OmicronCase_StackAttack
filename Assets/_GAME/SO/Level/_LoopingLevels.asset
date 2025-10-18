@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: _LoopingLevels
   m_EditorClassIdentifier: 
   Levels:
-  - {fileID: 11400000, guid: 413eb9b069a16477e8d94b3397ecf215, type: 2}
+  - {fileID: 11400000, guid: 4fe6f7f12ad664d9ca0ea4ec13ef6e9e, type: 2}
+  - {fileID: 11400000, guid: 7f7f812df69b94bfcab36aa4d105a494, type: 2}
+  - {fileID: 11400000, guid: 15dcf57cb81654ae88c79918147c2d44, type: 2}

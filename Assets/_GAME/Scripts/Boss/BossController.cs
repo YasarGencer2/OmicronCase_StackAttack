@@ -38,7 +38,7 @@ public class BossController : MonoBehaviour
     void TrySendRow()
     {
         timer += Time.deltaTime;
-        if (timer >= boss.FireRate)
+        if (timer >= 1 / boss.FireRate)
         {
             timer = 0;
             SendRow();
@@ -54,7 +54,10 @@ public class BossController : MonoBehaviour
 
         var endPos = GameHelper.Instance.DespawnY * Vector3.up;
         var time = Mathf.Abs(endPos.y - origin.y) / boss.RowMoveSpeed;
-        row.transform.DOMoveY(endPos.y, time).SetEase(Ease.Linear).OnComplete(() =>
+        var time1 = time * 0.2f;
+        var time2 = time * 0.8f;
+        row.transform.DOMoveY(transform.position.y - 2, time1).SetEase(Ease.Linear);
+        row.transform.DOMoveY(endPos.y, time2).SetDelay(time1).SetEase(Ease.Linear).OnComplete(() =>
         {
             row.Die?.Invoke(row);
         });
@@ -85,5 +88,5 @@ public class BossController : MonoBehaviour
         }
 
         return row;
-    } 
+    }
 }

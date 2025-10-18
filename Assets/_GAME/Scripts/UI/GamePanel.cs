@@ -14,8 +14,13 @@ public class GamePanel : MonoBehaviour
     [SerializeField] Slider bossSlider;
     [SerializeField] TextMeshProUGUI bossIncomingAlert;
 
+    CanvasGroup xpCG, bossCG;
+
     void OnEnable()
     {
+        xpCG = xp.GetComponent<CanvasGroup>();;
+        bossCG = bossSlider.GetComponent<CanvasGroup>();
+
         GameEventSystem.Instance.OnXPChange += ChangeXPSlider;
         GameEventSystem.Instance.OnHealtLost += HealtLost;
         GameEventSystem.Instance.OnLevelLoaded += OnLevelLoaded;
@@ -44,7 +49,8 @@ public class GamePanel : MonoBehaviour
     void LevelLoadStarted()
     {
         canvasGroup.DOFade(0, 0.2f);
-        bossSlider.GetComponent<CanvasGroup>().DOFade(0, 0);
+        xpCG.DOFade(1, 0f);
+        bossCG.DOFade(0, 0);
     }
     void FirstInput()
     {
@@ -52,8 +58,8 @@ public class GamePanel : MonoBehaviour
     }
     void BossSpawned()
     {
-        xp.GetComponent<CanvasGroup>().DOFade(0, 0.2f);
-        bossSlider.GetComponent<CanvasGroup>().DOFade(1, 0.2f);
+        xpCG.DOFade(0, 0.2f);
+        bossCG.DOFade(1, 0.2f);
 
         bossSlider.maxValue = LevelManager.Instance.Level.Boss.MaxHealth;
         bossSlider.value = bossSlider.maxValue;
